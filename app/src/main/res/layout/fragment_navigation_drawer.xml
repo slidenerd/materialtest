@@ -2,13 +2,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEE"
+    android:background="#DADADA"
     tools:context="materialtest.vivz.slidenerd.materialtest.NavigationDrawerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/containerDrawerImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="#FB8C00">
 
+        <ImageView
+            android:layout_width="280dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="@dimen/drawer_margin_top"
+            android:src="@drawable/ic_abstract" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/drawerList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
