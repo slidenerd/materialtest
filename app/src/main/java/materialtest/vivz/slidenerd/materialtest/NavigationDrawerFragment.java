@@ -7,19 +7,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -28,9 +23,9 @@ import java.util.List;
  */
 public class NavigationDrawerFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     public static final String PREF_FILE_NAME="testpref";
     public static final String KEY_USER_LEARNED_DRAWER="user_learned_drawer";
+    private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private VivzAdapter adapter;
@@ -40,6 +35,33 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean isDrawerOpened=false;
     public NavigationDrawerFragment() {
         // Required empty public constructor
+    }
+
+    public static List<Information> getData(){
+        //load only static data inside a drawer
+        List<Information> data=new ArrayList<>();
+        int[] icons={R.drawable.ic_number1,R.drawable.ic_number2,R.drawable.ic_number3,R.drawable.ic_number4};
+        String[] titles={"Vivz","Anky","Slidenerd","YouTube"};
+        for(int i=0;i<titles.length && i<icons.length;i++)
+        {
+            Information current=new Information();
+            current.iconId=icons[i];
+            current.title=titles[i];
+            data.add(current);
+        }
+        return data;
+    }
+
+    public static void saveToPreferences(Context context, String preferenceName, String preferenceValue){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString(preferenceName, preferenceValue);
+        editor.apply();
+    }
+
+    public static String readFromPreferences(Context context, String preferenceName, String defaultValue){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(preferenceName,defaultValue);
     }
 
     @Override
@@ -63,19 +85,6 @@ public class NavigationDrawerFragment extends Fragment {
         return layout;
     }
 
-    public static List<Information> getData(){
-        List<Information> data=new ArrayList<>();
-        int[] icons={R.drawable.ic_number1,R.drawable.ic_number2,R.drawable.ic_number3,R.drawable.ic_number4};
-        String[] titles={"Vivz","Anky","Slidenerd","YouTube"};
-        for(int i=0;i<titles.length && i<icons.length;i++)
-        {
-            Information current=new Information();
-            current.iconId=icons[i];
-            current.title=titles[i];
-            data.add(current);
-        }
-        return data;
-    }
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
         containerView=getActivity().findViewById(fragmentId);
         mDrawerLayout=drawerLayout;
@@ -117,15 +126,5 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
 
-    }
-    public static void saveToPreferences(Context context, String preferenceName, String preferenceValue){
-        SharedPreferences sharedPreferences=context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString(preferenceName, preferenceValue);
-        editor.apply();
-    }
-    public static String readFromPreferences(Context context, String preferenceName, String defaultValue){
-        SharedPreferences sharedPreferences=context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(preferenceName,defaultValue);
     }
 }
