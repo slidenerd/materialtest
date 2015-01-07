@@ -36,21 +36,21 @@ public class NavigationDrawerFragment extends Fragment {
     public NavigationDrawerFragment() {
         // Required empty public constructor
     }
-
     public static List<Information> getData(){
         //load only static data inside a drawer
         List<Information> data=new ArrayList<>();
         int[] icons={R.drawable.ic_number1,R.drawable.ic_number2,R.drawable.ic_number3,R.drawable.ic_number4};
         String[] titles={"Vivz","Anky","Slidenerd","YouTube"};
-        for(int i=0;i<titles.length && i<icons.length;i++)
+        for(int i=0;i<100;i++)
         {
             Information current=new Information();
-            current.iconId=icons[i];
-            current.title=titles[i];
+            current.iconId=icons[i%icons.length];
+            current.title=titles[i%titles.length];
             data.add(current);
         }
         return data;
     }
+
 
     public static void saveToPreferences(Context context, String preferenceName, String preferenceValue){
         SharedPreferences sharedPreferences=context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
