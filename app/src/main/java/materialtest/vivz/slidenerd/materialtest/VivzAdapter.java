@@ -31,7 +31,6 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=inflater.inflate(R.layout.custom_row, parent,false);
-
         MyViewHolder holder=new MyViewHolder(view);
         return holder;
     }
@@ -39,33 +38,23 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Information current=data.get(position);
-
         holder.title.setText(current.title);
         holder.icon.setImageResource(current.iconId);
-
-
     }
-
     @Override
     public int getItemCount() {
         return data.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         ImageView icon;
         public MyViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
             title= (TextView) itemView.findViewById(R.id.listText);
             icon= (ImageView) itemView.findViewById(R.id.listIcon);
 
         }
 
-
-        @Override
-        public void onClick(View v) {
-
-        }
     }
 }

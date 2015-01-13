@@ -20,6 +20,7 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="72dp"
-        android:text="Dummy Text" />
+        android:text="Dummy Text"
+        android:textColor="@color/colorSecondaryText" />
 
 </RelativeLayout>

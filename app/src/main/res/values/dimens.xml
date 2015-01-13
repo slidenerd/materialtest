@@ -3,4 +3,5 @@
     <dimen name="nav_drawer_width">280dp</dimen>
     <dimen name="app_bar_top_padding">0dp</dimen>
     <dimen name="drawer_margin_top">24dp</dimen>
+    <dimen name="dimen_4">4dp</dimen>
 </resources>
