@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
+    android:background="@drawable/custom_bg"
+    android:clickable="true"
     android:orientation="horizontal">
 
     <ImageView

@@ -53,8 +53,6 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> 
             super(itemView);
             title= (TextView) itemView.findViewById(R.id.listText);
             icon= (ImageView) itemView.findViewById(R.id.listIcon);
-
         }
-
     }
 }
