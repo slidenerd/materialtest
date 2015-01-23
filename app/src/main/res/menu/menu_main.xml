@@ -1,16 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context="materialtest.vivz.slidenerd.materialtest.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:title="@string/action_settings"
         android:orderInCategory="100"
+        android:title="@string/action_settings"
         app:showAsAction="never" />
     <item android:id="@+id/navigate"
-        android:title="@string/next"
-        android:orderInCategory="200"
         android:icon="@drawable/ic_next"
+        android:orderInCategory="200"
+        android:title="@string/next"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_tabs_using_library"
+        android:orderInCategory="200"
+        android:title="@string/action_tabs_using_library"
+        app:showAsAction="never" />
 
 </menu>

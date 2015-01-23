@@ -3,7 +3,6 @@ package materialtest.vivz.slidenerd.materialtest;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,12 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import materialtest.vivz.slidenerd.tabs.SlidingTabLayout;
@@ -48,9 +43,9 @@ public class MainActivity extends ActionBarActivity {
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
         mTabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
         mTabs.setDistributeEvenly(true);
-        mTabs.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
-        mTabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
+        mTabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        mTabs.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
         mTabs.setViewPager(mPager);
 
     }
@@ -79,31 +74,13 @@ public class MainActivity extends ActionBarActivity {
             startActivity(new Intent(this, SubActivity.class));
         }
 
+        if(R.id.action_tabs_using_library==id){
+            startActivity(new Intent(this, ActivityUsingTabLibrary.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 
-    public static class MyFragment extends Fragment {
-        private TextView textView;
 
-        public static MyFragment getInstance(int position) {
-            MyFragment myFragment = new MyFragment();
-            Bundle args = new Bundle();
-            args.putInt("position", position);
-            myFragment.setArguments(args);
-            return myFragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View layout = inflater.inflate(R.layout.fragment_my, container, false);
-            textView = (TextView) layout.findViewById(R.id.position);
-            Bundle bundle = getArguments();
-            if (bundle != null) {
-                textView.setText("The Page Selected Is " + bundle.getInt("position"));
-            }
-            return layout;
-        }
-    }
 
     class MyPagerAdapter extends FragmentPagerAdapter {
 

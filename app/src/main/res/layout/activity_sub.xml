@@ -4,9 +4,15 @@
     android:layout_height="match_parent"
     tools:context="materialtest.vivz.slidenerd.materialtest.SubActivity">
 
-    <include
-        android:id="@+id/app_bar"
-        layout="@layout/app_bar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar" />
+    </RelativeLayout>
+
 
     <materialtest.vivz.slidenerd.materialtest.MyView
         android:layout_width="wrap_content"
@@ -15,6 +21,6 @@
         android:background="@android:color/white"
         android:padding="16dp"
         android:text="My View"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black" />
 
 </materialtest.vivz.slidenerd.materialtest.MyLayout>
