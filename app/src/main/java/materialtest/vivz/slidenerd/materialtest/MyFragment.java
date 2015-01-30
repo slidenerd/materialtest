@@ -7,6 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import materialtest.vivz.slidenerd.network.VolleySingleton;
 
 /**
  * Created by Windows on 23-01-2015.
@@ -30,6 +39,19 @@ public class MyFragment extends Fragment {
         if (bundle != null) {
             textView.setText("The Page Selected Is " + bundle.getInt("position"));
         }
+        RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
+        StringRequest request=new StringRequest(Request.Method.GET,"http://php.net/",new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity(),"RESPONSE "+response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(),"ERROR "+error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(request);
         return layout;
     }
 }

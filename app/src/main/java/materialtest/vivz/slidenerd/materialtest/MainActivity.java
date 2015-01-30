@@ -70,7 +70,7 @@ public class MainActivity extends ActionBarActivity {
             Toast.makeText(this, "Hey you just hit " + item.getTitle(), Toast.LENGTH_SHORT).show();
             return true;
         }
-        if (id == R.id.navigate) {
+        if (id == R.id.action_touch_intercept_activity) {
             startActivity(new Intent(this, SubActivity.class));
         }
 

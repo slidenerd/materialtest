@@ -7,14 +7,14 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
-    <item android:id="@+id/navigate"
+    <item android:id="@+id/action_touch_intercept_activity"
         android:icon="@drawable/ic_next"
         android:orderInCategory="200"
         android:title="@string/next"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_tabs_using_library"
-        android:orderInCategory="200"
+        android:orderInCategory="300"
         android:title="@string/action_tabs_using_library"
         app:showAsAction="never" />
 
