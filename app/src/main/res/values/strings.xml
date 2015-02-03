@@ -21,7 +21,9 @@
         <item>TAB 6</item>
     </string-array>
 
-    <string name="title_activity_activity_using_tab_library">ActivityUsingTabLibrary</string>
-    <string name="action_tabs_using_library">Tabs With Library</string>
+    <string name="title_activity_activity_using_tab_library">SlidingTabLayoutActivity</string>
+    <string name="action_tabs_using_library">SlidingTabLayoutExample</string>
+    <string name="title_activity_vector_test">VectorTestActivity</string>
+    <string name="action_vector_test_activity">VectorTestActivity</string>
 
 </resources>

@@ -5,29 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="materialtest.vivz.slidenerd.materialtest.MainActivity">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/app_bar"
             layout="@layout/app_bar" />
 
-        <materialtest.vivz.slidenerd.tabs.SlidingTabLayout
-            android:id="@+id/tabs"
+        <it.neokree.materialtabs.MaterialTabHost
+            android:id="@+id/materialTabHost"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="48dp"
+            android:layout_below="@+id/app_bar"
+            app:accentColor="@color/colorAccent"
+            app:hasIcons="true"
+            app:iconColor="@android:color/white"
+            app:primaryColor="@color/colorPrimary" />
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-
+            android:layout_below="@+id/materialTabHost"
+            android:layout_weight="1" />
     </LinearLayout>
+
 
     <fragment
         android:id="@+id/fragment_navigation_drawer"

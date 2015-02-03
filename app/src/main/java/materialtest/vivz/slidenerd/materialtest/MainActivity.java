@@ -5,26 +5,25 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ImageSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import materialtest.vivz.slidenerd.tabs.SlidingTabLayout;
+import it.neokree.materialtabs.MaterialTab;
+import it.neokree.materialtabs.MaterialTabHost;
+import it.neokree.materialtabs.MaterialTabListener;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements MaterialTabListener {
 
     private Toolbar toolbar;
-    private ViewPager mPager;
-    private SlidingTabLayout mTabs;
+    private MaterialTabHost tabHost;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +37,25 @@ public class MainActivity extends ActionBarActivity {
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-        mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        mTabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
-        mTabs.setDistributeEvenly(true);
+        tabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        mTabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        mTabs.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
-        mTabs.setViewPager(mPager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                tabHost.setSelectedNavigationItem(position);
+            }
+        });
+        for (int i = 0; i < adapter.getCount(); i++) {
+            tabHost.addTab(
+                    tabHost.newTab()
+                            .setIcon(adapter.getIcon(i))
+                            .setTabListener(this));
+
+
+        }
 
     }
 
@@ -75,43 +84,68 @@ public class MainActivity extends ActionBarActivity {
         }
 
         if(R.id.action_tabs_using_library==id){
-            startActivity(new Intent(this, ActivityUsingTabLibrary.class));
+            startActivity(new Intent(this, ActivityWithSlidingTabLayout.class));
+        }
+        if(R.id.action_vector_test_activity==id){
+            startActivity(new Intent(this, VectorTestActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
 
 
+    @Override
+    public void onTabSelected(MaterialTab materialTab) {
+        viewPager.setCurrentItem(materialTab.getPosition());
+    }
 
-    class MyPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public void onTabReselected(MaterialTab materialTab) {
 
-        int icons[] = {R.drawable.ic_action_home, R.drawable.ic_action_articles, R.drawable.ic_action_personal};
-        String[] tabText = getResources().getStringArray(R.array.tabs);
+    }
 
-        public MyPagerAdapter(FragmentManager fm) {
+    @Override
+    public void onTabUnselected(MaterialTab materialTab) {
+
+    }
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+
+        int icons[] = {R.drawable.ic_action_home,
+                R.drawable.ic_action_articles,
+                R.drawable.ic_action_personal,
+                R.drawable.ic_action_home,
+                R.drawable.ic_action_articles,
+                R.drawable.ic_action_personal,
+                R.drawable.ic_action_home,
+                R.drawable.ic_action_articles,
+                R.drawable.ic_action_personal};
+
+        public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
-            tabText = getResources().getStringArray(R.array.tabs);
+
+
         }
 
-        @Override
-        public Fragment getItem(int position) {
-            MyFragment myFragment = MyFragment.getInstance(position);
-            return myFragment;
+
+        public Fragment getItem(int num) {
+            return MyFragment.getInstance(num);
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            Drawable drawable=getResources().getDrawable(icons[position]);
-            drawable.setBounds(0,0,36,36);
-            ImageSpan imageSpan=new ImageSpan(drawable);
-            SpannableString spannableString=new SpannableString(" ");
-            spannableString.setSpan(imageSpan,0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return spannableString;
-        }
 
         @Override
         public int getCount() {
-            return 3;
+            return 9;
         }
+
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return getResources().getStringArray(R.array.tabs)[position];
+        }
+
+        private Drawable getIcon(int position) {
+            return getResources().getDrawable(icons[position]);
+        }
+
+
     }
 }

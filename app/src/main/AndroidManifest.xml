@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="materialtest.vivz.slidenerd.materialtest" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -26,8 +27,12 @@
                 android:value="materialtest.vivz.slidenerd.materialtest.MainActivity" />
         </activity>
         <activity
-            android:name=".ActivityUsingTabLibrary"
+            android:name=".ActivityWithSlidingTabLayout"
             android:label="@string/title_activity_activity_using_tab_library" >
+        </activity>
+        <activity
+            android:name=".VectorTestActivity"
+            android:label="@string/title_activity_vector_test" >
         </activity>
     </application>
 

@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="materialtest.vivz.slidenerd.materialtest.VectorTestActivity">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
+
+    <ImageView
+        android:id="@+id/vectorImage"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:background="@drawable/vector_android"
+         />
+
+</LinearLayout>

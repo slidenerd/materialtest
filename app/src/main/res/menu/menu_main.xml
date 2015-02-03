@@ -13,9 +13,14 @@
         android:title="@string/next"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_tabs_using_library"
+    android:id="@+id/action_tabs_using_library"
+    android:orderInCategory="300"
+    android:title="@string/action_tabs_using_library"
+    app:showAsAction="never" />
+    <item
+        android:id="@+id/action_vector_test_activity"
         android:orderInCategory="300"
-        android:title="@string/action_tabs_using_library"
+        android:title="@string/action_vector_test_activity"
         app:showAsAction="never" />
 
 </menu>
