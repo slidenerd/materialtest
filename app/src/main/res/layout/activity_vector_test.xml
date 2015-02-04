@@ -11,9 +11,8 @@
 
     <ImageView
         android:id="@+id/vectorImage"
-        android:layout_width="144dp"
-        android:layout_height="144dp"
-        android:background="@drawable/vector_android"
-         />
+        android:layout_width="192dp"
+        android:layout_height="192dp"/>
+
 
 </LinearLayout>
