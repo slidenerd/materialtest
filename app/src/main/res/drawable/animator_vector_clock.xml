@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:drawable="@drawable/vector_clock"
+    tools:targetApi="21">
+    <target
+        android:name="rotate24hours"
+        android:animation="@anim/rotate24hours"
+        />
+    <target
+        android:name="rotate60seconds"
+        android:animation="@anim/rotate60seconds"
+        />
+</animated-vector>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="100dp"
+
+    android:height="100dp"
+    android:viewportHeight="100"
+    android:viewportWidth="100"
+    auto:height="100dp"
+    
+    auto:viewportHeight="100"
+    auto:viewportWidth="100"
+    auto:width="100dp"
+    tools:targetApi="21">
+
+    <group>
+    <path
+        android:fillColor="#000000"
+        android:pathData="M50,0C22.386,0,0,22.386,0,50s22.386,50,50,50c27.613,0,50-22.386,50-50S77.613,0,50,0z
+M50,96C24.595,96,4,75.405,4,50 S24.595,4,50,4s46,20.595,46,46S75.405,96,50,96z"
+        
+        auto:fillColor="#000000"
+        auto:pathData="M50,0C22.386,0,0,22.386,0,50s22.386,50,50,50c27.613,0,50-22.386,50-50S77.613,0,50,0z
+M50,96C24.595,96,4,75.405,4,50 S24.595,4,50,4s46,20.595,46,46S75.405,96,50,96z" />
+    </group>
+    <group
+        android:name="rotate24hours"
+        android:pivotX="50"
+        android:pivotY="50"
+        
+        auto:name="rotate24hours"
+        auto:pivotX="50"
+        auto:pivotY="50">
+        <path
+            android:fillColor="@color/colorAccent"
+            android:pathData="M48 50 L52 50 L52 70 L48 70  Z"
+
+            auto:fillColor="@color/colorAccent"
+            auto:pathData="M48 50 L52 50 L52 70 L48 70  Z"/>
+    </group>
+    <group
+        android:name="rotate60seconds"
+        android:pivotX="50"
+        android:pivotY="50"
+        
+        auto:name="rotate60seconds"
+        auto:pivotX="50"
+        auto:pivotY="50">
+        <path
+            android:fillColor="@color/colorPrimary"
+            android:pathData="M50 52 L90 52 L90 48 L50 48  Z"
+
+            auto:fillColor="@color/colorPrimary"
+            auto:pathData="M50 52 L90 52 L90 48 L50 48  Z"
+            />
+    </group>
+    <path
+        android:fillColor="@color/colorPrimaryText"
+        android:pathData="M48 48 L52 48 L52 52 L48 52  Z"
+
+        auto:fillColor="@color/colorPrimaryText"
+        auto:pathData="M48 48 L52 48 L52 52 L48 52  Z"
+        />
+
+</vector>

@@ -14,6 +14,8 @@ import android.text.style.ImageSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.telly.mrvector.MrVector;
+
 import materialtest.vivz.slidenerd.tabs.SlidingTabLayout;
 
 
@@ -70,7 +72,6 @@ public class ActivityWithSlidingTabLayout extends ActionBarActivity {
     }
     class MyPagerAdapter extends FragmentPagerAdapter {
 
-        int icons[] = {R.drawable.vector_android,R.drawable.vector_android,R.drawable.vector_android};
         String[] tabText = getResources().getStringArray(R.array.tabs);
 
         public MyPagerAdapter(FragmentManager fm) {
@@ -87,7 +88,15 @@ public class ActivityWithSlidingTabLayout extends ActionBarActivity {
         @Override
         public CharSequence getPageTitle(int position) {
 
-            Drawable drawable=getResources().getDrawable(icons[position]);
+            Drawable drawable=null;
+            if(Util.isLollipopOrGreater())
+            {
+                drawable= MrVector.inflate(getResources(), R.drawable.animator_vector_clock);
+            }
+            else{
+                drawable= MrVector.inflate(getResources(), R.drawable.vector_clock);
+            }
+
             drawable.setBounds(0,0,36,36);
             ImageSpan imageSpan=new ImageSpan(drawable);
             SpannableString spannableString=new SpannableString(" ");

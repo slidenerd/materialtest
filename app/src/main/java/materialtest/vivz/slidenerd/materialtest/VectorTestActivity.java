@@ -1,7 +1,8 @@
 package materialtest.vivz.slidenerd.materialtest;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ public class VectorTestActivity extends ActionBarActivity {
     ImageView imageView;
 
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,15 +27,27 @@ public class VectorTestActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         imageView = (ImageView) findViewById(R.id.vectorImage);
-        Drawable drawable=MrVector.inflate(getResources(), R.drawable.vector_android);
-        if(Build.VERSION.SDK_INT>=16){
+        Drawable drawable = null;
+        if(Util.isLollipopOrGreater()){
+            drawable=MrVector.inflate(getResources(), R.drawable.animator_vector_clock);
+        }
+        else{
+            drawable=MrVector.inflate(getResources(), R.drawable.vector_clock);
+        }
+        if(Util.isJellyBeanOrGreater()){
             imageView.setBackground(drawable);
         }
         else{
             imageView.setBackgroundDrawable(drawable);
         }
+        if(drawable instanceof Animatable){
+            ((Animatable)drawable).start();
+        }
 
     }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -12,7 +12,8 @@
     <ImageView
         android:id="@+id/vectorImage"
         android:layout_width="192dp"
-        android:layout_height="192dp"/>
+        android:layout_height="192dp"
+        android:layout_margin="16dp"/>
 
 
 </LinearLayout>
