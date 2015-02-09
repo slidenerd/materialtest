@@ -1,4 +1,4 @@
-package materialtest.vivz.slidenerd.materialtest;
+package materialtest.vivz.slidenerd.activities;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Animatable;
@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.telly.mrvector.MrVector;
+
+import materialtest.vivz.slidenerd.extras.Util;
+import materialtest.vivz.slidenerd.materialtest.R;
 
 
 public class VectorTestActivity extends ActionBarActivity {

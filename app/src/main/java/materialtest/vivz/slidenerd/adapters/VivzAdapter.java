@@ -1,4 +1,4 @@
-package materialtest.vivz.slidenerd.materialtest;
+package materialtest.vivz.slidenerd.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
+
+import materialtest.vivz.slidenerd.materialtest.R;
+import materialtest.vivz.slidenerd.pojo.Information;
 
 /**
  * Created by Windows on 22-12-2014.

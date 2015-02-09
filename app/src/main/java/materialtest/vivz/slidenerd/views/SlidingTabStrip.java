@@ -1,4 +1,4 @@
-package materialtest.vivz.slidenerd.tabs;
+package materialtest.vivz.slidenerd.views;
 
 /*
  * Copyright 2014 Google Inc. All rights reserved.

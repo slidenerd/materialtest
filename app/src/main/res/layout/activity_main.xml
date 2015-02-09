@@ -5,14 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <include
             android:id="@+id/app_bar"
             layout="@layout/app_bar" />
+
 
         <it.neokree.materialtabs.MaterialTabHost
             android:id="@+id/materialTabHost"
@@ -24,6 +27,7 @@
             app:iconColor="@android:color/white"
             app:primaryColor="@color/colorPrimary" />
 
+
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
@@ -33,13 +37,14 @@
     </LinearLayout>
 
 
+
+
     <fragment
         android:id="@+id/fragment_navigation_drawer"
-        android:name="materialtest.vivz.slidenerd.materialtest.NavigationDrawerFragment"
+        android:name="materialtest.vivz.slidenerd.fragments.NavigationDrawerFragment"
         android:layout_width="@dimen/nav_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:layout="@layout/fragment_navigation_drawer"
         tools:layout="@layout/fragment_navigation_drawer" />
 </android.support.v4.widget.DrawerLayout>
-

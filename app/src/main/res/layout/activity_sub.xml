@@ -1,12 +1,14 @@
-<materialtest.vivz.slidenerd.materialtest.MyLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<materialtest.vivz.slidenerd.views.MyLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="materialtest.vivz.slidenerd.materialtest.SubActivity">
+    tools:context="materialtest.vivz.slidenerd.activities.SubActivity">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <include
             android:id="@+id/app_bar"
@@ -14,7 +16,9 @@
     </RelativeLayout>
 
 
-    <materialtest.vivz.slidenerd.materialtest.MyView
+
+
+    <materialtest.vivz.slidenerd.views.MyView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -23,4 +27,5 @@
         android:text="My View"
         android:textColor="@android:color/black" />
 
-</materialtest.vivz.slidenerd.materialtest.MyLayout>
+
+</materialtest.vivz.slidenerd.views.MyLayout>

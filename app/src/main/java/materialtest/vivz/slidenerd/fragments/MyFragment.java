@@ -1,4 +1,4 @@
-package materialtest.vivz.slidenerd.materialtest;
+package materialtest.vivz.slidenerd.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import materialtest.vivz.slidenerd.materialtest.R;
 import materialtest.vivz.slidenerd.network.VolleySingleton;
 
 /**

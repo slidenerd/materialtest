@@ -1,4 +1,4 @@
-package materialtest.vivz.slidenerd.materialtest;
+package materialtest.vivz.slidenerd.pojo;
 
 /**
  * Created by Windows on 22-12-2014.

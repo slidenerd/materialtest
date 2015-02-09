@@ -10,6 +10,8 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import materialtest.vivz.slidenerd.logging.L;
+
 /**
  * Created by Windows on 13-01-5.
  */
@@ -565,7 +567,7 @@ public class DefaultItemAnimator extends RecyclerView.ItemAnimator {
             this.fromY = fromY;
             this.toX = toX;
             this.toY = toY;
-            L.m("MOVEINFO "+holder+" from X "+fromX+" to X "+toX+" from Y "+fromY+" to Y "+toY);
+            L.m("MOVEINFO " + holder + " from X " + fromX + " to X " + toX + " from Y " + fromY + " to Y " + toY);
         }
     }
 

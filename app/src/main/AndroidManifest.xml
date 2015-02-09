@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="materialtest.vivz.slidenerd.activities.MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,18 +20,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SubActivity"
+            android:name="materialtest.vivz.slidenerd.activities.SubActivity"
             android:label="@string/title_activity_sub" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="materialtest.vivz.slidenerd.materialtest.MainActivity" />
+                android:value="materialtest.vivz.slidenerd.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".ActivityWithSlidingTabLayout"
+            android:name="materialtest.vivz.slidenerd.activities.ActivityWithSlidingTabLayout"
             android:label="@string/title_activity_activity_using_tab_library" >
         </activity>
         <activity
-            android:name=".VectorTestActivity"
+            android:name="materialtest.vivz.slidenerd.activities.VectorTestActivity"
             android:label="@string/title_activity_vector_test" >
         </activity>
     </application>

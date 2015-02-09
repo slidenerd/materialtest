@@ -1,4 +1,4 @@
-package materialtest.vivz.slidenerd.materialtest;
+package materialtest.vivz.slidenerd.fragments;
 
 
 import android.content.Context;
@@ -18,6 +18,10 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import materialtest.vivz.slidenerd.adapters.VivzAdapter;
+import materialtest.vivz.slidenerd.materialtest.R;
+import materialtest.vivz.slidenerd.pojo.Information;
 
 
 /**

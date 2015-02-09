@@ -1,4 +1,4 @@
-package materialtest.vivz.slidenerd.materialtest;
+package materialtest.vivz.slidenerd.activities;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,7 +16,9 @@ import android.view.MenuItem;
 
 import com.telly.mrvector.MrVector;
 
-import materialtest.vivz.slidenerd.tabs.SlidingTabLayout;
+import materialtest.vivz.slidenerd.fragments.MyFragment;
+import materialtest.vivz.slidenerd.materialtest.R;
+import materialtest.vivz.slidenerd.views.SlidingTabLayout;
 
 
 public class ActivityWithSlidingTabLayout extends ActionBarActivity {
@@ -33,7 +35,6 @@ public class ActivityWithSlidingTabLayout extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
 
 
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -70,6 +71,7 @@ public class ActivityWithSlidingTabLayout extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     class MyPagerAdapter extends FragmentPagerAdapter {
 
         String[] tabText = getResources().getStringArray(R.array.tabs);
@@ -88,19 +90,11 @@ public class ActivityWithSlidingTabLayout extends ActionBarActivity {
         @Override
         public CharSequence getPageTitle(int position) {
 
-            Drawable drawable=null;
-            if(Util.isLollipopOrGreater())
-            {
-                drawable= MrVector.inflate(getResources(), R.drawable.animator_vector_clock);
-            }
-            else{
-                drawable= MrVector.inflate(getResources(), R.drawable.vector_clock);
-            }
-
-            drawable.setBounds(0,0,36,36);
-            ImageSpan imageSpan=new ImageSpan(drawable);
-            SpannableString spannableString=new SpannableString(" ");
-            spannableString.setSpan(imageSpan,0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            Drawable drawable = MrVector.inflate(getResources(), R.drawable.vector_android);
+            drawable.setBounds(0, 0, 36, 36);
+            ImageSpan imageSpan = new ImageSpan(drawable);
+            SpannableString spannableString = new SpannableString(" ");
+            spannableString.setSpan(imageSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return spannableString;
         }
 
@@ -109,8 +103,6 @@ public class ActivityWithSlidingTabLayout extends ActionBarActivity {
             return 3;
         }
     }
-
-
 
 
 }

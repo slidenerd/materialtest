@@ -1,4 +1,4 @@
-package materialtest.vivz.slidenerd.tabs;
+package materialtest.vivz.slidenerd.views;
 
 /**
  * Created by Windows on 16-01-2015.
