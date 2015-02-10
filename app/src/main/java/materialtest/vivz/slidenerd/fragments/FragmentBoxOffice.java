@@ -14,12 +14,37 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import materialtest.vivz.slidenerd.logging.L;
 import materialtest.vivz.slidenerd.materialtest.MyApplication;
 import materialtest.vivz.slidenerd.materialtest.R;
 import materialtest.vivz.slidenerd.network.VolleySingleton;
+import materialtest.vivz.slidenerd.pojo.Movie;
+
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_AUDIENCE_SCORE;
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_ID;
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_MOVIES;
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_POSTERS;
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_RATINGS;
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_RELEASE_DATES;
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_SYNOPSIS;
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_THEATER;
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_THUMBNAIL;
+import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_TITLE;
+import static materialtest.vivz.slidenerd.extras.UrlEndpoints.URL_BOX_OFFICE;
+import static materialtest.vivz.slidenerd.extras.UrlEndpoints.URL_CHAR_AMEPERSAND;
+import static materialtest.vivz.slidenerd.extras.UrlEndpoints.URL_CHAR_QUESTION;
+import static materialtest.vivz.slidenerd.extras.UrlEndpoints.URL_PARAM_API_KEY;
+import static materialtest.vivz.slidenerd.extras.UrlEndpoints.URL_PARAM_LIMIT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +52,7 @@ import materialtest.vivz.slidenerd.network.VolleySingleton;
  * create an instance of this fragment.
  */
 public class FragmentBoxOffice extends Fragment {
-    public static final String URL_ROTTEN_TOMATOES_BOX_OFFICE="http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json";
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,6 +63,8 @@ public class FragmentBoxOffice extends Fragment {
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
     private RequestQueue requestQueue;
+    private ArrayList<Movie> listMovies = new ArrayList<>();
+    private DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 
     public FragmentBoxOffice() {
         // Required empty public constructor
@@ -61,8 +88,13 @@ public class FragmentBoxOffice extends Fragment {
         return fragment;
     }
 
-    public static String getRequestUrl(int limit){
-        return URL_ROTTEN_TOMATOES_BOX_OFFICE+"?apikey="+ MyApplication.API_KEY_ROTTEN_TOMATOES+"&limit="+limit;
+    public static String getRequestUrl(int limit) {
+
+        return URL_BOX_OFFICE
+                + URL_CHAR_QUESTION
+                + URL_PARAM_API_KEY + MyApplication.API_KEY_ROTTEN_TOMATOES
+                + URL_CHAR_AMEPERSAND
+                + URL_PARAM_LIMIT + limit;
     }
 
     @Override
@@ -73,23 +105,88 @@ public class FragmentBoxOffice extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        volleySingleton=VolleySingleton.getInstance();
-        requestQueue=volleySingleton.getRequestQueue();
-        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET,
+        volleySingleton = VolleySingleton.getInstance();
+        requestQueue = volleySingleton.getRequestQueue();
+
+
+    }
+
+    private void sendJsonRequest() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 getRequestUrl(10),
                 null,
                 new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                L.t(getActivity(), response.toString());
-            }
-        }, new Response.ErrorListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        parseJSONResponse(response);
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
             }
         });
         requestQueue.add(request);
+    }
+
+    private void parseJSONResponse(JSONObject response) {
+        if (response == null || response.length() == 0) {
+            return;
+        }
+        try {
+            JSONArray arrayMovies = response.getJSONArray(KEY_MOVIES);
+            for (int i = 0; i < arrayMovies.length(); i++) {
+                JSONObject currentMovie = arrayMovies.getJSONObject(i);
+                //get the id of the current movie
+                long id = currentMovie.getLong(KEY_ID);
+                //get the title of the current movie
+                String title = currentMovie.getString(KEY_TITLE);
+
+                //get the date in theaters for the current movie
+                JSONObject objectReleaseDates = currentMovie.getJSONObject(KEY_RELEASE_DATES);
+                String releaseDate = null;
+                if (objectReleaseDates.has(KEY_THEATER)) {
+                    releaseDate = objectReleaseDates.getString(KEY_THEATER);
+                } else {
+                    releaseDate = "NA";
+                }
+
+                //get the audience score for the current movie
+                JSONObject objectRatings = currentMovie.getJSONObject(KEY_RATINGS);
+                int audienceScore = -1;
+                if (objectRatings.has(KEY_AUDIENCE_SCORE)) {
+                    audienceScore = objectRatings.getInt(KEY_AUDIENCE_SCORE);
+                }
+
+                // get the synopsis of the current movie
+                String synopsis = currentMovie.getString(KEY_SYNOPSIS);
+
+                JSONObject objectPosters = currentMovie.getJSONObject(KEY_POSTERS);
+                String urlThumbnail = null;
+                if (objectPosters.has(KEY_THUMBNAIL)) {
+                    urlThumbnail = objectPosters.getString(KEY_THUMBNAIL);
+                }
+                Movie movie=new Movie();
+                movie.setId(id);
+                movie.setTitle(title);
+                Date date=dateFormat.parse(releaseDate);
+                movie.setReleaseDateTheater(date);
+                movie.setAudienceScore(audienceScore);
+                movie.setSynopsis(synopsis);
+                movie.setUrlThumbnail(urlThumbnail);
+
+                listMovies.add(movie);
+
+            }
+            L.T(getActivity(), listMovies.toString());
+
+
+        } catch (JSONException e) {
+
+        }
+        catch (ParseException e){
+
+        }
 
     }
 
@@ -97,6 +194,7 @@ public class FragmentBoxOffice extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        sendJsonRequest();
         return inflater.inflate(R.layout.fragment_box_office, container, false);
     }
 

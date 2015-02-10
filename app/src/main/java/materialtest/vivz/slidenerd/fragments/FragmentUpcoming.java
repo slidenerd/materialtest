@@ -25,22 +25,8 @@ public class FragmentUpcoming extends Fragment {
     private String mParam2;
 
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentUpcoming.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentUpcoming newInstance(String param1, String param2) {
-        FragmentUpcoming fragment = new FragmentUpcoming();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+   public FragmentUpcoming() {
+        // Required empty public constructor
     }
 
     /**
@@ -59,8 +45,6 @@ public class FragmentUpcoming extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }    public FragmentUpcoming() {
-        // Required empty public constructor
     }
 
     @Override
