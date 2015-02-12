@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/word"
+    android:layout_marginRight="@dimen/word"
+    android:minHeight="72dp">
+
+    <ImageView
+        android:id="@+id/movieThumbnail"
+        android:layout_width="54dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="@dimen/word"
+        android:layout_marginTop="@dimen/word"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/movieTitle"
+        style="@style/Base.TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/movieThumbnail"
+        android:layout_marginLeft="56dp"
+        android:gravity="right"
+        android:padding="@dimen/half_byte"
+        android:text="Hitman Agent 47"
+        android:textSize="@dimen/sizeTextPrimary" />
+
+    <TextView
+        android:id="@+id/movieReleaseDate"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/movieTitle"
+        android:padding="@dimen/half_byte"
+        android:text="31-31-31"
+        android:textSize="@dimen/sizeTextSecondary" />
+
+    <RatingBar
+        android:id="@+id/movieAudienceScore"
+        style="@android:style/Widget.Holo.RatingBar.Indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/movieReleaseDate"
+        android:isIndicator="false"
+        android:max="5"
+        android:numStars="0" />
+</RelativeLayout>

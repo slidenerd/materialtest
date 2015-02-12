@@ -7,5 +7,9 @@
     <dimen name="dimen_4">4dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="word">16dp</dimen>
+    <dimen name="sizeTextPrimary">16sp</dimen>
+    <dimen name="sizeTextSecondary">14sp</dimen>
+    <dimen name="half_byte">4dp</dimen>
 
 </resources>
