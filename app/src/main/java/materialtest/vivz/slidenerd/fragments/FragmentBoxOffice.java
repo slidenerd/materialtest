@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import materialtest.vivz.slidenerd.adapters.AdapterBoxOffice;
-import materialtest.vivz.slidenerd.logging.L;
 import materialtest.vivz.slidenerd.materialtest.MyApplication;
 import materialtest.vivz.slidenerd.materialtest.R;
 import materialtest.vivz.slidenerd.network.VolleySingleton;
@@ -184,7 +183,6 @@ public class FragmentBoxOffice extends Fragment {
                     listMovies.add(movie);
 
                 }
-                L.T(getActivity(), listMovies.toString());
 
 
             } catch (JSONException e) {
