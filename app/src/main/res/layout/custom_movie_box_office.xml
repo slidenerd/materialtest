@@ -41,12 +41,12 @@
 
     <RatingBar
         android:id="@+id/movieAudienceScore"
-        style="@android:style/Widget.Holo.RatingBar.Indicator"
+        style="@android:style/Widget.Holo.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/movieReleaseDate"
-        android:isIndicator="false"
+        android:isIndicator="true"
         android:max="5"
         android:numStars="0" />
 </RelativeLayout>
