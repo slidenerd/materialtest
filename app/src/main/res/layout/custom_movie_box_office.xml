@@ -2,42 +2,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/word"
-    android:layout_marginRight="@dimen/word"
-    android:minHeight="72dp">
+    android:layout_marginBottom="@dimen/size_byte"
+    android:layout_marginLeft="@dimen/size_word"
+    android:layout_marginRight="@dimen/size_word"
+    android:layout_marginTop="@dimen/size_byte">
 
     <ImageView
         android:id="@+id/movieThumbnail"
-        android:layout_width="54dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="@dimen/word"
-        android:layout_marginTop="@dimen/word"
+        android:layout_width="@dimen/movie_thumbnail_width"
+        android:layout_height="@dimen/movie_thumbnail_height"
+        android:layout_centerVertical="true"
+
         android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/movieTitle"
-        style="@style/Base.TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/movieThumbnail"
         android:layout_marginLeft="56dp"
+        android:alpha="0.87"
         android:gravity="right"
-        android:padding="@dimen/half_byte"
+        android:padding="@dimen/size_half_byte"
         android:text="Hitman Agent 47"
-        android:textSize="@dimen/sizeTextPrimary" />
+        android:textSize="@dimen/size_text_primary" />
 
     <TextView
         android:id="@+id/movieReleaseDate"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/movieTitle"
-        android:padding="@dimen/half_byte"
+        android:alpha="0.87"
+        android:padding="@dimen/size_half_byte"
         android:text="31-31-31"
-        android:textSize="@dimen/sizeTextSecondary" />
+        android:textSize="@dimen/size_text_secondary" />
 
     <RatingBar
         android:id="@+id/movieAudienceScore"

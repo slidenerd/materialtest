@@ -25,5 +25,9 @@
     <string name="action_tabs_using_library">SlidingTabLayoutExample</string>
     <string name="title_activity_vector_test">VectorTestActivity</string>
     <string name="action_vector_test_activity">VectorTestActivity</string>
+    <string name="error_timeout">Oops! Your Connection Timed Out</string>
+    <string name="error_auth_failure">Oops! RottenTomatoes Says It Doesn\'t Recognize You</string>
+    <string name="error_network">Oops! RottenTomatoes Server Just Messed Up</string>
+    <string name="error_parser">Oops! Data Received Was An Unreadable Mess</string>
 
 </resources>
