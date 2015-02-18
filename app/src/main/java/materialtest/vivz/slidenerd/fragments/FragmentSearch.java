@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import materialtest.vivz.slidenerd.extras.SortListener;
+import materialtest.vivz.slidenerd.logging.L;
 import materialtest.vivz.slidenerd.materialtest.R;
 
 /**
@@ -14,7 +16,7 @@ import materialtest.vivz.slidenerd.materialtest.R;
  * Use the {@link FragmentSearch#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentSearch extends Fragment {
+public class FragmentSearch extends Fragment implements SortListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,6 +57,19 @@ public class FragmentSearch extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    public void onSortByName(){
+        L.t(getActivity(), "sort name search");
+    }
+
+    @Override
+    public void onSortByDate() {
+
+    }
+
+    @Override
+    public void onSortByRating() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +77,4 @@ public class FragmentSearch extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
-
-
 }

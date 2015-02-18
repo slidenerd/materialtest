@@ -31,18 +31,17 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
     private LayoutInflater layoutInflater;
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
-    private DateFormat dateFormatter=new SimpleDateFormat("yyyy-MM-dd");
+    private DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public AdapterBoxOffice(Context context) {
+
         layoutInflater = LayoutInflater.from(context);
         volleySingleton = VolleySingleton.getInstance();
         imageLoader = volleySingleton.getImageLoader();
-
     }
-
-    public void setMovieList(ArrayList<Movie> listMovies) {
-        this.listMovies = listMovies;
-        notifyItemRangeChanged(0, listMovies.size());
+    public void setMovies(ArrayList<Movie> listMovies){
+        this.listMovies=listMovies;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -56,21 +55,19 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
     public void onBindViewHolder(ViewHolderBoxOffice holder, int position) {
         Movie currentMovie = listMovies.get(position);
         holder.movieTitle.setText(currentMovie.getTitle());
-        Date movieReleaseDate=currentMovie.getReleaseDateTheater();
-        if(movieReleaseDate!=null){
-            String formattedDate=dateFormatter.format(movieReleaseDate);
+        Date movieReleaseDate = currentMovie.getReleaseDateTheater();
+        if (movieReleaseDate != null) {
+            String formattedDate = dateFormatter.format(movieReleaseDate);
             holder.movieReleaseDate.setText(formattedDate);
-        }
-        else{
+        } else {
             holder.movieReleaseDate.setText(Constants.NA);
         }
 
-        int audienceScore=currentMovie.getAudienceScore();
-        if(audienceScore==-1){
+        int audienceScore = currentMovie.getAudienceScore();
+        if (audienceScore == -1) {
             holder.movieAudienceScore.setRating(0.0F);
             holder.movieAudienceScore.setAlpha(0.5F);
-        }
-        else{
+        } else {
             holder.movieAudienceScore.setRating(audienceScore / 20.0F);
             holder.movieAudienceScore.setAlpha(1.0F);
         }

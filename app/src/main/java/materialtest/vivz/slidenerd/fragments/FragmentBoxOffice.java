@@ -35,6 +35,8 @@ import java.util.Date;
 
 import materialtest.vivz.slidenerd.adapters.AdapterBoxOffice;
 import materialtest.vivz.slidenerd.extras.Constants;
+import materialtest.vivz.slidenerd.extras.MovieSorter;
+import materialtest.vivz.slidenerd.extras.SortListener;
 import materialtest.vivz.slidenerd.logging.L;
 import materialtest.vivz.slidenerd.materialtest.MyApplication;
 import materialtest.vivz.slidenerd.materialtest.R;
@@ -62,7 +64,7 @@ import static materialtest.vivz.slidenerd.extras.UrlEndpoints.URL_PARAM_LIMIT;
  * Use the {@link FragmentBoxOffice#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentBoxOffice extends Fragment {
+public class FragmentBoxOffice extends Fragment implements SortListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,9 +81,11 @@ public class FragmentBoxOffice extends Fragment {
     private AdapterBoxOffice adapterBoxOffice;
     private RecyclerView listMovieHits;
     private TextView textVolleyError;
+    private MovieSorter movieSorter;
 
     public FragmentBoxOffice() {
         // Required empty public constructor
+        movieSorter=new MovieSorter();
     }
 
     /**
@@ -111,6 +115,24 @@ public class FragmentBoxOffice extends Fragment {
                 + URL_PARAM_LIMIT + limit;
     }
 
+    public void onSortByName(){
+        movieSorter.sortMoviesByName(listMovies);
+        adapterBoxOffice.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void onSortByDate() {
+        movieSorter.sortMoviesByDate(listMovies);
+        adapterBoxOffice.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSortByRating() {
+        movieSorter.sortMoviesByRating(listMovies);
+        adapterBoxOffice.notifyDataSetChanged();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +146,7 @@ public class FragmentBoxOffice extends Fragment {
 
     }
 
+
     private void sendJsonRequest() {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 getRequestUrl(30),
@@ -133,7 +156,7 @@ public class FragmentBoxOffice extends Fragment {
                     public void onResponse(JSONObject response) {
                         textVolleyError.setVisibility(View.GONE);
                         listMovies = parseJSONResponse(response);
-                        adapterBoxOffice.setMovieList(listMovies);
+                        adapterBoxOffice.setMovies(listMovies);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -143,6 +166,8 @@ public class FragmentBoxOffice extends Fragment {
         });
         requestQueue.add(request);
     }
+
+
 
     private void handleVolleyError(VolleyError error){
         textVolleyError.setVisibility(View.VISIBLE);
@@ -255,6 +280,7 @@ public class FragmentBoxOffice extends Fragment {
         return listMovies;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -269,6 +295,5 @@ public class FragmentBoxOffice extends Fragment {
         sendJsonRequest();
         return view;
     }
-
 
 }

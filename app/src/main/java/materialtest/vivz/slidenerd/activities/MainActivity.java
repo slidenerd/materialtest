@@ -13,27 +13,40 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
+import materialtest.vivz.slidenerd.extras.SortListener;
 import materialtest.vivz.slidenerd.fragments.FragmentBoxOffice;
 import materialtest.vivz.slidenerd.fragments.FragmentSearch;
 import materialtest.vivz.slidenerd.fragments.FragmentUpcoming;
 import materialtest.vivz.slidenerd.fragments.NavigationDrawerFragment;
+import materialtest.vivz.slidenerd.logging.L;
 import materialtest.vivz.slidenerd.materialtest.R;
 
 
-public class MainActivity extends ActionBarActivity implements MaterialTabListener {
+public class MainActivity extends ActionBarActivity implements MaterialTabListener, View.OnClickListener {
 
-
-    public static final int MOVIES_SEARCH_RESULTS=0;
-    public static final int MOVIES_HITS=1;
-    public static final int MOVIES_UPCOMING=2;
+    public static final int MOVIES_SEARCH_RESULTS = 0;
+    public static final int MOVIES_HITS = 1;
+    public static final int MOVIES_UPCOMING = 2;
+    public static final int TAB_COUNT = 3;
+    private static final String TAG_SORT_NAME = "sortName";
+    private static final String TAG_SORT_DATE = "sortDate";
+    private static final String TAG_SORT_RATINGS = "sortRatings";
     private Toolbar toolbar;
     private MaterialTabHost tabHost;
     private ViewPager viewPager;
+    private ViewPagerAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +66,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -68,10 +81,55 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                             .setIcon(adapter.getIcon(i))
                             .setTabListener(this));
         }
-
-
+        buildFAB();
     }
 
+    private void buildFAB() {
+        //define the icon for the main floating action button
+        ImageView iconActionButton = new ImageView(this);
+        iconActionButton.setImageResource(R.drawable.ic_action_new);
+
+        //set the appropriate background for the main floating action button along with its icon
+        FloatingActionButton actionButton = new FloatingActionButton.Builder(this)
+                .setContentView(iconActionButton)
+                .setBackgroundDrawable(R.drawable.selector_button_red)
+                .build();
+
+        //define the icons for the sub action buttons
+        ImageView iconSortName = new ImageView(this);
+        iconSortName.setImageResource(R.drawable.ic_action_alphabets);
+        ImageView iconSortDate = new ImageView(this);
+        iconSortDate.setImageResource(R.drawable.ic_action_calendar);
+        ImageView iconSortRatings = new ImageView(this);
+        iconSortRatings.setImageResource(R.drawable.ic_action_important);
+
+        //set the background for all the sub buttons
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+        itemBuilder.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_sub_button_gray));
+
+
+        //build the sub buttons
+        SubActionButton buttonSortName = itemBuilder.setContentView(iconSortName).build();
+        SubActionButton buttonSortDate = itemBuilder.setContentView(iconSortDate).build();
+        SubActionButton buttonSortRatings = itemBuilder.setContentView(iconSortRatings).build();
+
+        buttonSortName.setTag(TAG_SORT_NAME);
+        buttonSortDate.setTag(TAG_SORT_DATE);
+        buttonSortRatings.setTag(TAG_SORT_RATINGS);
+
+        buttonSortName.setOnClickListener(this);
+        buttonSortDate.setOnClickListener(this);
+        buttonSortRatings.setOnClickListener(this);
+
+
+        //add the sub buttons to the main floating action button
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+                .addSubActionView(buttonSortName)
+                .addSubActionView(buttonSortDate)
+                .addSubActionView(buttonSortRatings)
+                .attachTo(actionButton)
+                .build();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,13 +175,31 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
     @Override
     public void onTabReselected(MaterialTab materialTab) {
-
     }
 
 
     @Override
     public void onTabUnselected(MaterialTab materialTab) {
     }
+
+    @Override
+    public void onClick(View v) {
+        Fragment fragment= (Fragment) adapter.instantiateItem(viewPager,viewPager.getCurrentItem());
+        if(fragment instanceof SortListener){
+
+            if (v.getTag().equals(TAG_SORT_NAME)) {
+                ((SortListener) fragment).onSortByName();
+            }
+            if (v.getTag().equals(TAG_SORT_DATE)) {
+                ((SortListener) fragment).onSortByDate();
+            }
+            if (v.getTag().equals(TAG_SORT_RATINGS)) {
+                ((SortListener) fragment).onSortByRating();
+            }
+        }
+
+    }
+
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -132,22 +208,26 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
                 R.drawable.ic_action_articles,
                 R.drawable.ic_action_personal,};
 
+        FragmentManager fragmentManager;
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
+            fragmentManager = fm;
         }
 
         public Fragment getItem(int num) {
-            Fragment fragment=null;
-            switch (num){
+            Fragment fragment = null;
+            L.m("getItem called for " + num);
+            switch (num) {
                 case MOVIES_SEARCH_RESULTS:
-                    fragment= FragmentSearch.newInstance("","");
+
+                    fragment = FragmentSearch.newInstance("", "");
                     break;
                 case MOVIES_HITS:
-                    fragment= FragmentBoxOffice.newInstance("", "");
+                    fragment = FragmentBoxOffice.newInstance("", "");
                     break;
                 case MOVIES_UPCOMING:
-                    fragment= FragmentUpcoming.newInstance("", "");
+                    fragment = FragmentUpcoming.newInstance("", "");
                     break;
             }
             return fragment;
@@ -156,7 +236,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         @Override
         public int getCount() {
-            return 3;
+            return TAB_COUNT;
         }
 
         @Override

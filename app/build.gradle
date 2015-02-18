@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "materialtest.vivz.slidenerd.materialtest"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -27,4 +27,5 @@ dependencies {
     compile 'it.neokree:MaterialTabs:0.11'
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile 'com.telly:mrvector:0.2.0'
+    compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
 }
