@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="@dimen/size_word"
-        android:text="#FF4444"
+        android:textColor="#FF4444"
         android:visibility="gone"/>
 
 </FrameLayout>

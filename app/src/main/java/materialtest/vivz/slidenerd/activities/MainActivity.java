@@ -1,6 +1,7 @@
 package materialtest.vivz.slidenerd.activities;
 
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ import materialtest.vivz.slidenerd.fragments.FragmentUpcoming;
 import materialtest.vivz.slidenerd.fragments.NavigationDrawerFragment;
 import materialtest.vivz.slidenerd.logging.L;
 import materialtest.vivz.slidenerd.materialtest.R;
+import materialtest.vivz.slidenerd.services.MyService;
+import me.tatarka.support.job.JobInfo;
+import me.tatarka.support.job.JobScheduler;
 
 
 public class MainActivity extends ActionBarActivity implements MaterialTabListener, View.OnClickListener {
@@ -39,9 +43,11 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     public static final int MOVIES_HITS = 1;
     public static final int MOVIES_UPCOMING = 2;
     public static final int TAB_COUNT = 3;
+    private static final int JOB_ID = 100;
     private static final String TAG_SORT_NAME = "sortName";
     private static final String TAG_SORT_DATE = "sortDate";
     private static final String TAG_SORT_RATINGS = "sortRatings";
+    private JobScheduler mJobScheduler;
     private Toolbar toolbar;
     private MaterialTabHost tabHost;
     private ViewPager viewPager;
@@ -52,15 +58,14 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        mJobScheduler=JobScheduler.getInstance(this);
+        constructJob();
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
-
 
         tabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -84,6 +89,14 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         buildFAB();
     }
 
+    private void constructJob(){
+        JobInfo.Builder builder=new JobInfo.Builder(JOB_ID,new ComponentName(this, MyService.class));
+        builder.setPeriodic(4000)
+        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+        .setPersisted(true);
+
+        mJobScheduler.schedule(builder.build());
+    }
     private void buildFAB() {
         //define the icon for the main floating action button
         ImageView iconActionButton = new ImageView(this);

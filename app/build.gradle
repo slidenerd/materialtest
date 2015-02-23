@@ -28,4 +28,5 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile 'com.telly:mrvector:0.2.0'
     compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+    compile 'me.tatarka.support:jobscheduler:0.1.1'
 }

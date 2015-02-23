@@ -1,11 +1,27 @@
 package materialtest.vivz.slidenerd.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
+
+import materialtest.vivz.slidenerd.logging.L;
 
 /**
  * Created by Windows on 09-02-2015.
  */
-public class Movie {
+public class Movie implements Parcelable {
+    public static final Parcelable.Creator<Movie> CREATOR
+            = new Parcelable.Creator<Movie>() {
+        public Movie createFromParcel(Parcel in) {
+            L.m("create from parcel :Movie");
+            return new Movie(in);
+        }
+
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
     private long id;
     private String title;
     private Date releaseDateTheater;
@@ -19,6 +35,18 @@ public class Movie {
 
     public Movie(){
 
+    }
+    public Movie(Parcel input){
+        id=input.readLong();
+        title=input.readString();
+        releaseDateTheater=new Date(input.readLong());
+        audienceScore=input.readInt();
+        synopsis=input.readString();
+        urlThumbnail=input.readString();
+        urlSelf=input.readString();
+        urlCast=input.readString();
+        urlReviews=input.readString();
+        urlSimilar=input.readString();
     }
 
     public Movie(long id,
@@ -132,5 +160,27 @@ public class Movie {
                 "Score "+audienceScore+
                 "urlThumbnail "+urlThumbnail+
                 "\n";
+    }
+
+    @Override
+    public int describeContents() {
+        L.m("describe Contents Movie");
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        L.m("writeToParcel Movie");
+        dest.writeLong(id);
+        dest.writeString(title);
+        dest.writeLong(releaseDateTheater.getTime());
+        dest.writeInt(audienceScore);
+        dest.writeString(synopsis);
+        dest.writeString(urlThumbnail);
+        dest.writeString(urlSelf);
+        dest.writeString(urlCast);
+        dest.writeString(urlReviews);
+        dest.writeString(urlSimilar);
+
     }
 }
