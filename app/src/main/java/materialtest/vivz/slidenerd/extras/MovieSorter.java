@@ -3,6 +3,7 @@ package materialtest.vivz.slidenerd.extras;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 import materialtest.vivz.slidenerd.pojo.Movie;
 
@@ -23,7 +24,16 @@ public class MovieSorter {
         Collections.sort(movies, new Comparator<Movie>() {
             @Override
             public int compare(Movie lhs, Movie rhs) {
-                return rhs.getReleaseDateTheater().compareTo(lhs.getReleaseDateTheater());
+                Date lhsDate=lhs.getReleaseDateTheater();
+                Date rhsDate=rhs.getReleaseDateTheater();
+                if(lhs.getReleaseDateTheater()!=null && rhs.getReleaseDateTheater()!=null)
+                {
+                    return rhs.getReleaseDateTheater().compareTo(lhs.getReleaseDateTheater());
+                }
+                else {
+                    return 0;
+                }
+
             }
         });
     }

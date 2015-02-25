@@ -30,7 +30,6 @@ import materialtest.vivz.slidenerd.fragments.FragmentBoxOffice;
 import materialtest.vivz.slidenerd.fragments.FragmentSearch;
 import materialtest.vivz.slidenerd.fragments.FragmentUpcoming;
 import materialtest.vivz.slidenerd.fragments.NavigationDrawerFragment;
-import materialtest.vivz.slidenerd.logging.L;
 import materialtest.vivz.slidenerd.materialtest.R;
 import materialtest.vivz.slidenerd.services.MyService;
 import me.tatarka.support.job.JobInfo;
@@ -47,6 +46,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     private static final String TAG_SORT_NAME = "sortName";
     private static final String TAG_SORT_DATE = "sortDate";
     private static final String TAG_SORT_RATINGS = "sortRatings";
+    private static final long POLL_FREQUENCY = 120000;
     private JobScheduler mJobScheduler;
     private Toolbar toolbar;
     private MaterialTabHost tabHost;
@@ -91,10 +91,9 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
     private void constructJob(){
         JobInfo.Builder builder=new JobInfo.Builder(JOB_ID,new ComponentName(this, MyService.class));
-        builder.setPeriodic(4000)
+        builder.setPeriodic(POLL_FREQUENCY)
         .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
         .setPersisted(true);
-
         mJobScheduler.schedule(builder.build());
     }
     private void buildFAB() {
@@ -230,7 +229,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         public Fragment getItem(int num) {
             Fragment fragment = null;
-            L.m("getItem called for " + num);
+//            L.m("getItem called for " + num);
             switch (num) {
                 case MOVIES_SEARCH_RESULTS:
 

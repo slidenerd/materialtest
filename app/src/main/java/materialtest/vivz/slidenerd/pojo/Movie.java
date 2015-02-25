@@ -33,20 +33,21 @@ public class Movie implements Parcelable {
     private String urlReviews;
     private String urlSimilar;
 
-    public Movie(){
+    public Movie() {
 
     }
-    public Movie(Parcel input){
-        id=input.readLong();
-        title=input.readString();
-        releaseDateTheater=new Date(input.readLong());
-        audienceScore=input.readInt();
-        synopsis=input.readString();
-        urlThumbnail=input.readString();
-        urlSelf=input.readString();
-        urlCast=input.readString();
-        urlReviews=input.readString();
-        urlSimilar=input.readString();
+
+    public Movie(Parcel input) {
+        id = input.readLong();
+        title = input.readString();
+        releaseDateTheater = input.readLong() == -1 ? null : new Date(input.readLong());
+        audienceScore = input.readInt();
+        synopsis = input.readString();
+        urlThumbnail = input.readString();
+        urlSelf = input.readString();
+        urlCast = input.readString();
+        urlReviews = input.readString();
+        urlSimilar = input.readString();
     }
 
     public Movie(long id,
@@ -58,17 +59,17 @@ public class Movie implements Parcelable {
                  String urlSelf,
                  String urlCast,
                  String urlReviews,
-                 String urlSimilar){
-        this.id=id;
-        this.title=title;
-        this.releaseDateTheater=releaseDateTheater;
-        this.audienceScore=audienceScore;
-        this.synopsis=synopsis;
-        this.urlThumbnail=urlThumbnail;
-        this.urlSelf=urlSelf;
-        this.urlCast=urlCast;
-        this.urlReviews=urlReviews;
-        this.urlSimilar=urlSimilar;
+                 String urlSimilar) {
+        this.id = id;
+        this.title = title;
+        this.releaseDateTheater = releaseDateTheater;
+        this.audienceScore = audienceScore;
+        this.synopsis = synopsis;
+        this.urlThumbnail = urlThumbnail;
+        this.urlSelf = urlSelf;
+        this.urlCast = urlCast;
+        this.urlReviews = urlReviews;
+        this.urlSimilar = urlSimilar;
     }
 
     public long getId() {
@@ -153,27 +154,31 @@ public class Movie implements Parcelable {
 
     @Override
     public String toString() {
-        return "ID: "+id+
-                "Title "+title+
-                "Date "+releaseDateTheater+
-                "Synopsis "+synopsis+
-                "Score "+audienceScore+
-                "urlThumbnail "+urlThumbnail+
+        return "\nID: " + id +
+                "\nTitle " + title +
+                "\nDate " + releaseDateTheater +
+                "\nSynopsis " + synopsis +
+                "\nScore " + audienceScore +
+                "\nurlThumbnail " + urlThumbnail +
+                "\nurlSelf " + urlSelf +
+                "\nurlCast " + urlCast +
+                "\nurlReviews " + urlReviews +
+                "\nurlSimilar " + urlSimilar +
                 "\n";
     }
 
     @Override
     public int describeContents() {
-        L.m("describe Contents Movie");
+//        L.m("describe Contents Movie");
         return 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        L.m("writeToParcel Movie");
+//        L.m("writeToParcel Movie");
         dest.writeLong(id);
         dest.writeString(title);
-        dest.writeLong(releaseDateTheater.getTime());
+        dest.writeLong(releaseDateTheater == null ? -1 : releaseDateTheater.getTime());
         dest.writeInt(audienceScore);
         dest.writeString(synopsis);
         dest.writeString(urlThumbnail);
