@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -46,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     private static final String TAG_SORT_NAME = "sortName";
     private static final String TAG_SORT_DATE = "sortDate";
     private static final String TAG_SORT_RATINGS = "sortRatings";
-    private static final long POLL_FREQUENCY = 120000;
+    private static final long POLL_FREQUENCY = 600000;
     private JobScheduler mJobScheduler;
     private Toolbar toolbar;
     private MaterialTabHost tabHost;
@@ -58,8 +59,13 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mJobScheduler=JobScheduler.getInstance(this);
-        constructJob();
+        mJobScheduler = JobScheduler.getInstance(this);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                constructJob();
+            }
+        }, 30000);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -89,13 +95,14 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         buildFAB();
     }
 
-    private void constructJob(){
-        JobInfo.Builder builder=new JobInfo.Builder(JOB_ID,new ComponentName(this, MyService.class));
+    private void constructJob() {
+        JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this, MyService.class));
         builder.setPeriodic(POLL_FREQUENCY)
-        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
-        .setPersisted(true);
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setPersisted(true);
         mJobScheduler.schedule(builder.build());
     }
+
     private void buildFAB() {
         //define the icon for the main floating action button
         ImageView iconActionButton = new ImageView(this);
@@ -196,8 +203,8 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
     @Override
     public void onClick(View v) {
-        Fragment fragment= (Fragment) adapter.instantiateItem(viewPager,viewPager.getCurrentItem());
-        if(fragment instanceof SortListener){
+        Fragment fragment = (Fragment) adapter.instantiateItem(viewPager, viewPager.getCurrentItem());
+        if (fragment instanceof SortListener) {
 
             if (v.getTag().equals(TAG_SORT_NAME)) {
                 ((SortListener) fragment).onSortByName();
