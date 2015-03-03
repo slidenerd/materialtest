@@ -40,7 +40,7 @@ public class Movie implements Parcelable {
     public Movie(Parcel input) {
         id = input.readLong();
         title = input.readString();
-        releaseDateTheater = input.readLong() == -1 ? null : new Date(input.readLong());
+        releaseDateTheater = (input.readLong() == -1 ? null : new Date(input.readLong()));
         audienceScore = input.readInt();
         synopsis = input.readString();
         urlThumbnail = input.readString();

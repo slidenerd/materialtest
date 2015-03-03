@@ -29,5 +29,8 @@
     <string name="error_auth_failure">Oops! RottenTomatoes Says It Doesn\'t Recognize You</string>
     <string name="error_network">Oops! RottenTomatoes Server Just Messed Up</string>
     <string name="error_parser">Oops! Data Received Was An Unreadable Mess</string>
+    <string name="title_activity_dynamic_tabs">Dynamic Tabs</string>
+    <string name="add_tab">Add Tab</string>
+    <string name="action_dynamic_tabs_activity">Dynamic Tabs</string>
 
 </resources>

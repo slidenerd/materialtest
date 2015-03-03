@@ -47,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     private static final String TAG_SORT_NAME = "sortName";
     private static final String TAG_SORT_DATE = "sortDate";
     private static final String TAG_SORT_RATINGS = "sortRatings";
-    private static final long POLL_FREQUENCY = 600000;
+    private static final long POLL_FREQUENCY = 12000000;
     private JobScheduler mJobScheduler;
     private Toolbar toolbar;
     private MaterialTabHost tabHost;
@@ -181,6 +181,10 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         }
         if (R.id.action_vector_test_activity == id) {
             startActivity(new Intent(this, VectorTestActivity.class));
+        }
+
+        if (R.id.action_dynamic_tabs_activity == id) {
+            startActivity(new Intent(this, DynamicTabsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

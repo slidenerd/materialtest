@@ -7,20 +7,26 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
-    <item android:id="@+id/action_touch_intercept_activity"
+    <item
+        android:id="@+id/action_touch_intercept_activity"
         android:icon="@drawable/ic_next"
         android:orderInCategory="200"
         android:title="@string/next"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
-    android:id="@+id/action_tabs_using_library"
-    android:orderInCategory="300"
-    android:title="@string/action_tabs_using_library"
-    app:showAsAction="never" />
+        android:id="@+id/action_tabs_using_library"
+        android:orderInCategory="300"
+        android:title="@string/action_tabs_using_library"
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_vector_test_activity"
         android:orderInCategory="300"
         android:title="@string/action_vector_test_activity"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_dynamic_tabs_activity"
+        android:orderInCategory="400"
+        android:title="@string/action_dynamic_tabs_activity"
         app:showAsAction="never" />
 
 </menu>

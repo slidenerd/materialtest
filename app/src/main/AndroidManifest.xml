@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="materialtest.vivz.slidenerd.materialtest">
+    package="materialtest.vivz.slidenerd.materialtest" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Always required on api < 21, needed to keep a wake lock while your job is running -->
@@ -40,9 +40,16 @@
             android:name="materialtest.vivz.slidenerd.activities.VectorTestActivity"
             android:label="@string/title_activity_vector_test" >
         </activity>
-        <service android:name="materialtest.vivz.slidenerd.services.MyService"
+
+        <service
+            android:name="materialtest.vivz.slidenerd.services.MyService"
             android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name="materialtest.vivz.slidenerd.activities.DynamicTabsActivity"
+            android:label="@string/title_activity_dynamic_tabs" >
+        </activity>
     </application>
 
 </manifest>
