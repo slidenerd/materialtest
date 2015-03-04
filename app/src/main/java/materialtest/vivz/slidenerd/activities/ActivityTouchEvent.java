@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import materialtest.vivz.slidenerd.materialtest.R;
 
 
-public class SubActivity extends ActionBarActivity {
+public class ActivityTouchEvent extends ActionBarActivity {
 
 
     public static final String TAG="VIVZ";

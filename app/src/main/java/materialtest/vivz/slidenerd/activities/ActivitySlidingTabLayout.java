@@ -16,12 +16,12 @@ import android.view.MenuItem;
 
 import com.telly.mrvector.MrVector;
 
-import materialtest.vivz.slidenerd.fragments.MyFragment;
+import materialtest.vivz.slidenerd.fragments.FragmentDummy;
 import materialtest.vivz.slidenerd.materialtest.R;
 import materialtest.vivz.slidenerd.views.SlidingTabLayout;
 
 
-public class ActivityWithSlidingTabLayout extends ActionBarActivity {
+public class ActivitySlidingTabLayout extends ActionBarActivity {
 
     private Toolbar toolbar;
     private ViewPager mPager;
@@ -83,8 +83,8 @@ public class ActivityWithSlidingTabLayout extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            MyFragment myFragment = MyFragment.getInstance(position);
-            return myFragment;
+            FragmentDummy fragmentDummy = FragmentDummy.getInstance(position);
+            return fragmentDummy;
         }
 
         @Override

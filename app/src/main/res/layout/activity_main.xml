@@ -11,11 +11,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <include
             android:id="@+id/app_bar"
             layout="@layout/app_bar" />
-
 
         <it.neokree.materialtabs.MaterialTabHost
             android:id="@+id/materialTabHost"
@@ -41,7 +39,7 @@
 
     <fragment
         android:id="@+id/fragment_navigation_drawer"
-        android:name="materialtest.vivz.slidenerd.fragments.NavigationDrawerFragment"
+        android:name="materialtest.vivz.slidenerd.fragments.FragmentDrawer"
         android:layout_width="@dimen/nav_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"

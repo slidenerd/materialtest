@@ -17,11 +17,11 @@ import materialtest.vivz.slidenerd.pojo.Information;
 /**
  * Created by Windows on 22-12-2014.
  */
-public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> {
+public class AdapterVivz extends RecyclerView.Adapter<AdapterVivz.MyViewHolder> {
     List<Information> data= Collections.emptyList();
     private LayoutInflater inflater;
     private Context context;
-    public VivzAdapter(Context context, List<Information> data){
+    public AdapterVivz(Context context, List<Information> data){
         this.context=context;
         inflater=LayoutInflater.from(context);
         this.data=data;

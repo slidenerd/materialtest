@@ -21,15 +21,15 @@ import materialtest.vivz.slidenerd.network.VolleySingleton;
 /**
  * Created by Windows on 23-01-2015.
  */
-public class MyFragment extends Fragment {
+public class FragmentDummy extends Fragment {
     private TextView textView;
 
-    public static MyFragment getInstance(int position) {
-        MyFragment myFragment = new MyFragment();
+    public static FragmentDummy getInstance(int position) {
+        FragmentDummy fragmentDummy = new FragmentDummy();
         Bundle args = new Bundle();
         args.putInt("position", position);
-        myFragment.setArguments(args);
-        return myFragment;
+        fragmentDummy.setArguments(args);
+        return fragmentDummy;
     }
 
     @Override

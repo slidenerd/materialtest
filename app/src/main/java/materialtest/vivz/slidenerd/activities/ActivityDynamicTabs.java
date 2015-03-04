@@ -22,7 +22,7 @@ import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 import materialtest.vivz.slidenerd.materialtest.R;
 
-public class DynamicTabsActivity extends ActionBarActivity implements MaterialTabListener {
+public class ActivityDynamicTabs extends ActionBarActivity implements MaterialTabListener {
 
     Toolbar toolbar;
     private MaterialTabHost tabHost;
@@ -90,7 +90,7 @@ public class DynamicTabsActivity extends ActionBarActivity implements MaterialTa
 
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    tabHost.addTab(tabHost.newTab().setText(input.getText().toString()).setTabListener(DynamicTabsActivity.this));
+                    tabHost.addTab(tabHost.newTab().setText(input.getText().toString()).setTabListener(ActivityDynamicTabs.this));
                     tabHost.notifyDataSetChanged();
                     adapter.setCount(adapter.getCount() + 1);
 

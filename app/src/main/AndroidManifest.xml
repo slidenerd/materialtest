@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="materialtest.vivz.slidenerd.activities.MainActivity"
+            android:name="materialtest.vivz.slidenerd.activities.ActivityMain"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,29 +26,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="materialtest.vivz.slidenerd.activities.SubActivity"
+            android:name="materialtest.vivz.slidenerd.activities.ActivityTouchEvent"
             android:label="@string/title_activity_sub" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="materialtest.vivz.slidenerd.activities.MainActivity" />
+                android:value="materialtest.vivz.slidenerd.activities.ActivityMain" />
         </activity>
         <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivityWithSlidingTabLayout"
+            android:name="materialtest.vivz.slidenerd.activities.ActivitySlidingTabLayout"
             android:label="@string/title_activity_activity_using_tab_library" >
         </activity>
         <activity
-            android:name="materialtest.vivz.slidenerd.activities.VectorTestActivity"
+            android:name="materialtest.vivz.slidenerd.activities.ActivityVectorDrawable"
             android:label="@string/title_activity_vector_test" >
         </activity>
 
         <service
-            android:name="materialtest.vivz.slidenerd.services.MyService"
+            android:name="materialtest.vivz.slidenerd.services.ServiceMoviesBoxOffice"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity
-            android:name="materialtest.vivz.slidenerd.activities.DynamicTabsActivity"
+            android:name="materialtest.vivz.slidenerd.activities.ActivityDynamicTabs"
             android:label="@string/title_activity_dynamic_tabs" >
+        </activity>
+        <activity
+            android:name="materialtest.vivz.slidenerd.activities.ActivityRecyclerItemAnimations"
+            android:label="@string/title_activity_recycler_item_animations" >
         </activity>
     </application>
 

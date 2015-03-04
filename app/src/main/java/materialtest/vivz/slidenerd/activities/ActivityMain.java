@@ -28,16 +28,16 @@ import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 import materialtest.vivz.slidenerd.extras.SortListener;
 import materialtest.vivz.slidenerd.fragments.FragmentBoxOffice;
+import materialtest.vivz.slidenerd.fragments.FragmentDrawer;
 import materialtest.vivz.slidenerd.fragments.FragmentSearch;
 import materialtest.vivz.slidenerd.fragments.FragmentUpcoming;
-import materialtest.vivz.slidenerd.fragments.NavigationDrawerFragment;
 import materialtest.vivz.slidenerd.materialtest.R;
-import materialtest.vivz.slidenerd.services.MyService;
+import materialtest.vivz.slidenerd.services.ServiceMoviesBoxOffice;
 import me.tatarka.support.job.JobInfo;
 import me.tatarka.support.job.JobScheduler;
 
 
-public class MainActivity extends ActionBarActivity implements MaterialTabListener, View.OnClickListener {
+public class ActivityMain extends ActionBarActivity implements MaterialTabListener, View.OnClickListener {
 
     public static final int MOVIES_SEARCH_RESULTS = 0;
     public static final int MOVIES_HITS = 1;
@@ -69,7 +69,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
+        FragmentDrawer drawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
@@ -96,7 +96,7 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     }
 
     private void constructJob() {
-        JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this, MyService.class));
+        JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this, ServiceMoviesBoxOffice.class));
         builder.setPeriodic(POLL_FREQUENCY)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
                 .setPersisted(true);
@@ -172,19 +172,22 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
             return true;
         }
         if (id == R.id.action_touch_intercept_activity) {
-            startActivity(new Intent(this, SubActivity.class));
+            startActivity(new Intent(this, ActivityTouchEvent.class));
         }
 
 
         if (R.id.action_tabs_using_library == id) {
-            startActivity(new Intent(this, ActivityWithSlidingTabLayout.class));
+            startActivity(new Intent(this, ActivitySlidingTabLayout.class));
         }
         if (R.id.action_vector_test_activity == id) {
-            startActivity(new Intent(this, VectorTestActivity.class));
+            startActivity(new Intent(this, ActivityVectorDrawable.class));
         }
 
         if (R.id.action_dynamic_tabs_activity == id) {
-            startActivity(new Intent(this, DynamicTabsActivity.class));
+            startActivity(new Intent(this, ActivityDynamicTabs.class));
+        }
+        if (R.id.action_recycler_item_animations == id) {
+            startActivity(new Intent(this, ActivityRecyclerItemAnimations.class));
         }
         return super.onOptionsItemSelected(item);
     }

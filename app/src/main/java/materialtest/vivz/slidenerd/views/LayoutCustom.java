@@ -12,21 +12,21 @@ import android.widget.FrameLayout;
 /**
  * Created by Windows on 07-01-2015.
  */
-public class MyLayout extends FrameLayout {
+public class LayoutCustom extends FrameLayout {
     public static final String TAG="VIVZ";
     Paint paint=null;
-    public MyLayout(Context context) {
+    public LayoutCustom(Context context) {
         super(context);
 
         init();
     }
 
-    public MyLayout(Context context, AttributeSet attrs) {
+    public LayoutCustom(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public MyLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LayoutCustom(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init();

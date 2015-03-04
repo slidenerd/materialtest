@@ -16,7 +16,7 @@ import materialtest.vivz.slidenerd.extras.Util;
 import materialtest.vivz.slidenerd.materialtest.R;
 
 
-public class VectorTestActivity extends ActionBarActivity {
+public class ActivityVectorDrawable extends ActionBarActivity {
 
     Toolbar toolbar;
     ImageView imageView;

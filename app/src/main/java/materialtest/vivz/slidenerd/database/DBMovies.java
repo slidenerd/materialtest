@@ -16,11 +16,11 @@ import materialtest.vivz.slidenerd.pojo.Movie;
 /**
  * Created by Windows on 25-02-2015.
  */
-public class MoviesDatabase {
+public class DBMovies {
     private MoviesHelper mHelper;
     private SQLiteDatabase mDatabase;
 
-    public MoviesDatabase(Context context) {
+    public DBMovies(Context context) {
         mHelper = new MoviesHelper(context);
         mDatabase = mHelper.getWritableDatabase();
     }

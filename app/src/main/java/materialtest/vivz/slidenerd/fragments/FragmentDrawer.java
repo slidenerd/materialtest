@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import materialtest.vivz.slidenerd.adapters.VivzAdapter;
+import materialtest.vivz.slidenerd.adapters.AdapterVivz;
 import materialtest.vivz.slidenerd.materialtest.R;
 import materialtest.vivz.slidenerd.pojo.Information;
 
@@ -27,7 +27,7 @@ import materialtest.vivz.slidenerd.pojo.Information;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class FragmentDrawer extends Fragment {
 
     /*
     STEPS TO HANDLE THE RECYCLER CLICK
@@ -55,13 +55,13 @@ public class NavigationDrawerFragment extends Fragment {
     private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private VivzAdapter adapter;
+    private AdapterVivz adapter;
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
     private View containerView;
     private boolean isDrawerOpened = false;
 
-    public NavigationDrawerFragment() {
+    public FragmentDrawer() {
         // Required empty public constructor
     }
 
@@ -107,7 +107,7 @@ public class NavigationDrawerFragment extends Fragment {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
-        adapter = new VivzAdapter(getActivity(), getData());
+        adapter = new AdapterVivz(getActivity(), getData());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView,new ClickListener() {

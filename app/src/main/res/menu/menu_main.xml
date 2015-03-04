@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="materialtest.vivz.slidenerd.activities.MainActivity">
+    tools:context="materialtest.vivz.slidenerd.activities.ActivityMain">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
@@ -27,6 +27,11 @@
         android:id="@+id/action_dynamic_tabs_activity"
         android:orderInCategory="400"
         android:title="@string/action_dynamic_tabs_activity"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_recycler_item_animations"
+        android:orderInCategory="500"
+        android:title="@string/action_recycler_item_animations"
         app:showAsAction="never" />
 
 </menu>

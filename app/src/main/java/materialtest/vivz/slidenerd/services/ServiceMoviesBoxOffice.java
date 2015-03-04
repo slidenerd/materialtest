@@ -12,7 +12,7 @@ import me.tatarka.support.job.JobService;
 /**
  * Created by Windows on 23-02-2015.
  */
-public class MyService extends JobService implements BoxOfficeMoviesLoadedListener {
+public class ServiceMoviesBoxOffice extends JobService implements BoxOfficeMoviesLoadedListener {
     private JobParameters jobParameters;
 
     @Override

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="materialtest.vivz.slidenerd.fragments.NavigationDrawerFragment">
+    tools:context="materialtest.vivz.slidenerd.fragments.FragmentDrawer">
 
     <LinearLayout
         android:id="@+id/containerDrawerImage"

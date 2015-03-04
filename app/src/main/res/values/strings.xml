@@ -32,5 +32,11 @@
     <string name="title_activity_dynamic_tabs">Dynamic Tabs</string>
     <string name="add_tab">Add Tab</string>
     <string name="action_dynamic_tabs_activity">Dynamic Tabs</string>
+    <string name="title_activity_recycler_item_animations">RecyclerItemAnimations
+    </string>
+    <string name="action_recycler_item_animations">RecyclerItemAnimator</string>
+    <string name="action_add">+</string>
+    <string name="action_remove">-</string>
+    <string name="add_item">Add Item</string>
 
 </resources>

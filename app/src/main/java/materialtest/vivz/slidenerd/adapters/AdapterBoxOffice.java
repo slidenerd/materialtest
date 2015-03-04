@@ -32,6 +32,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
     private DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    private float scrollDelay = 0.01F;
 
     public AdapterBoxOffice(Context context) {
 
@@ -39,8 +40,9 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
         volleySingleton = VolleySingleton.getInstance();
         imageLoader = volleySingleton.getImageLoader();
     }
-    public void setMovies(ArrayList<Movie> listMovies){
-        this.listMovies=listMovies;
+
+    public void setMovies(ArrayList<Movie> listMovies) {
+        this.listMovies = listMovies;
         notifyDataSetChanged();
     }
 
@@ -77,6 +79,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
 
     }
 
+
     private void loadImages(String urlThumbnail, final ViewHolderBoxOffice holder) {
         if (!urlThumbnail.equals(Constants.NA)) {
             imageLoader.get(urlThumbnail, new ImageLoader.ImageListener() {
@@ -100,6 +103,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
 
     static class ViewHolderBoxOffice extends RecyclerView.ViewHolder {
 
+        View itemView;
         ImageView movieThumbnail;
         TextView movieTitle;
         TextView movieReleaseDate;
@@ -107,6 +111,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
 
         public ViewHolderBoxOffice(View itemView) {
             super(itemView);
+            this.itemView = itemView;
             movieThumbnail = (ImageView) itemView.findViewById(R.id.movieThumbnail);
             movieTitle = (TextView) itemView.findViewById(R.id.movieTitle);
             movieReleaseDate = (TextView) itemView.findViewById(R.id.movieReleaseDate);

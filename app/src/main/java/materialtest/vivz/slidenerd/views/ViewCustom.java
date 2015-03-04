@@ -10,20 +10,20 @@ import android.widget.TextView;
 /**
  * Created by Windows on 07-01-2015.
  */
-public class MyView extends TextView {
+public class ViewCustom extends TextView {
     public static final String TAG="VIVZ";
     Paint paint;
-    public MyView(Context context) {
+    public ViewCustom(Context context) {
         super(context);
         init();
     }
 
-    public MyView(Context context, AttributeSet attrs) {
+    public ViewCustom(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public MyView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ViewCustom(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
