@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import materialtest.vivz.slidenerd.anim.AnimationUtils;
 import materialtest.vivz.slidenerd.extras.Constants;
 import materialtest.vivz.slidenerd.materialtest.R;
 import materialtest.vivz.slidenerd.network.VolleySingleton;
@@ -32,7 +33,8 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
     private DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-    private float scrollDelay = 0.01F;
+    private int previousPosition=0;
+
 
     public AdapterBoxOffice(Context context) {
 
@@ -74,6 +76,16 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
             holder.movieAudienceScore.setAlpha(1.0F);
         }
 
+        if(position>previousPosition)
+        {
+            AnimationUtils.animate(holder,true);
+        }
+        else{
+            AnimationUtils.animate(holder, false);
+        }
+        previousPosition=position;
+
+
         String urlThumnail = currentMovie.getUrlThumbnail();
         loadImages(urlThumnail, holder);
 
@@ -103,7 +115,6 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
 
     static class ViewHolderBoxOffice extends RecyclerView.ViewHolder {
 
-        View itemView;
         ImageView movieThumbnail;
         TextView movieTitle;
         TextView movieReleaseDate;
@@ -111,7 +122,6 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
 
         public ViewHolderBoxOffice(View itemView) {
             super(itemView);
-            this.itemView = itemView;
             movieThumbnail = (ImageView) itemView.findViewById(R.id.movieThumbnail);
             movieTitle = (TextView) itemView.findViewById(R.id.movieTitle);
             movieReleaseDate = (TextView) itemView.findViewById(R.id.movieReleaseDate);

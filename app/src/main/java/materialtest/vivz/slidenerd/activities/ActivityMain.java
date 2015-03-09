@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
+import materialtest.vivz.slidenerd.anim.AnimationUtils;
 import materialtest.vivz.slidenerd.extras.SortListener;
 import materialtest.vivz.slidenerd.fragments.FragmentBoxOffice;
 import materialtest.vivz.slidenerd.fragments.FragmentDrawer;
@@ -50,6 +52,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     private static final long POLL_FREQUENCY = 12000000;
     private JobScheduler mJobScheduler;
     private Toolbar toolbar;
+    private ViewGroup containerAppBar;
     private MaterialTabHost tabHost;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
@@ -67,8 +70,12 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
             }
         }, 30000);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
+        containerAppBar= (ViewGroup) findViewById(R.id.container_app_bar);
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        AnimationUtils.animateToolbar(containerAppBar);
         FragmentDrawer drawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
@@ -93,6 +100,12 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
                             .setTabListener(this));
         }
         buildFAB();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     private void constructJob() {
