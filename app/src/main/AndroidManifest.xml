@@ -51,7 +51,7 @@
             android:label="@string/title_activity_dynamic_tabs" >
         </activity>
         <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivityRecyclerItemAnimations"
+            android:name="materialtest.vivz.slidenerd.activities.ActivityRecylerAnimators"
             android:label="@string/title_activity_recycler_item_animations" >
         </activity>
     </application>

@@ -23,39 +23,39 @@ import it.neokree.materialtabs.MaterialTabListener;
 import materialtest.vivz.slidenerd.materialtest.R;
 
 public class ActivityDynamicTabs extends ActionBarActivity implements MaterialTabListener {
-
-    Toolbar toolbar;
-    private MaterialTabHost tabHost;
-    private ViewPager viewPager;
-    private ViewPagerAdapter adapter;
+    
+    private Toolbar mToolbar;
+    private MaterialTabHost mTabHost;
+    private ViewPager mViewPager;
+    private ViewPagerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dynamic_tabs);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        mTabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
 
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                tabHost.setSelectedNavigationItem(position);
+                mTabHost.setSelectedNavigationItem(position);
 
             }
         });
 
-        for (int i = 0; i < adapter.getCount(); i++) {
-            MaterialTab materialTab = tabHost.newTab();
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            MaterialTab materialTab = mTabHost.newTab();
             materialTab.setText("Default Tab");
             materialTab.setTabListener(this);
-            tabHost.addTab(materialTab);
+            mTabHost.addTab(materialTab);
         }
     }
 
@@ -90,9 +90,9 @@ public class ActivityDynamicTabs extends ActionBarActivity implements MaterialTa
 
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    tabHost.addTab(tabHost.newTab().setText(input.getText().toString()).setTabListener(ActivityDynamicTabs.this));
-                    tabHost.notifyDataSetChanged();
-                    adapter.setCount(adapter.getCount() + 1);
+                    mTabHost.addTab(mTabHost.newTab().setText(input.getText().toString()).setTabListener(ActivityDynamicTabs.this));
+                    mTabHost.notifyDataSetChanged();
+                    mAdapter.setCount(mAdapter.getCount() + 1);
 
                 }
             });
@@ -110,7 +110,7 @@ public class ActivityDynamicTabs extends ActionBarActivity implements MaterialTa
 
     @Override
     public void onTabSelected(MaterialTab materialTab) {
-        viewPager.setCurrentItem(materialTab.getPosition());
+        mViewPager.setCurrentItem(materialTab.getPosition());
     }
 
     @Override
