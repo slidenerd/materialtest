@@ -28,40 +28,46 @@ import materialtest.vivz.slidenerd.pojo.Movie;
  */
 public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.ViewHolderBoxOffice> {
 
-    private ArrayList<Movie> listMovies = new ArrayList<>();
-    private LayoutInflater layoutInflater;
-    private VolleySingleton volleySingleton;
-    private ImageLoader imageLoader;
-    private DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-    private int previousPosition = 0;
+    //contains the list of movies
+    private ArrayList<Movie> mListMovies = new ArrayList<>();
+    private LayoutInflater mInflater;
+    private VolleySingleton mVolleySingleton;
+    private ImageLoader mImageLoader;
+    //formatter for parsing the dates in the specified format below
+    private DateFormat mFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    //keep track of the previous position for animations where scrolling down requires a different animation compared to scrolling up
+    private int mPreviousPosition = 0;
 
 
     public AdapterBoxOffice(Context context) {
-
-        layoutInflater = LayoutInflater.from(context);
-        volleySingleton = VolleySingleton.getInstance();
-        imageLoader = volleySingleton.getImageLoader();
+        mInflater = LayoutInflater.from(context);
+        mVolleySingleton = VolleySingleton.getInstance();
+        mImageLoader = mVolleySingleton.getImageLoader();
     }
 
     public void setMovies(ArrayList<Movie> listMovies) {
-        this.listMovies = listMovies;
+        this.mListMovies = listMovies;
+        //update the adapter to reflect the new set of movies
         notifyDataSetChanged();
     }
 
     @Override
     public ViewHolderBoxOffice onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.custom_movie_box_office, parent, false);
+        View view = mInflater.inflate(R.layout.custom_movie_box_office, parent, false);
         ViewHolderBoxOffice viewHolder = new ViewHolderBoxOffice(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolderBoxOffice holder, int position) {
-        Movie currentMovie = listMovies.get(position);
+        Movie currentMovie = mListMovies.get(position);
+        //one or more fields of the Movie object may be null since they are fetched from the web
         holder.movieTitle.setText(currentMovie.getTitle());
+
+        //retrieved date may be null
         Date movieReleaseDate = currentMovie.getReleaseDateTheater();
         if (movieReleaseDate != null) {
-            String formattedDate = dateFormatter.format(movieReleaseDate);
+            String formattedDate = mFormatter.format(movieReleaseDate);
             holder.movieReleaseDate.setText(formattedDate);
         } else {
             holder.movieReleaseDate.setText(Constants.NA);
@@ -76,7 +82,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
             holder.movieAudienceScore.setAlpha(1.0F);
         }
 
-        if (position > previousPosition) {
+        if (position > mPreviousPosition) {
             AnimationUtils.animateScatter(holder, true);
 //            AnimationUtils.animateSunblind(holder, true);
 //            AnimationUtils.animate1(holder, true);
@@ -87,8 +93,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
 //            AnimationUtils.animate1(holder, false);
 //            AnimationUtils.animate(holder, false);
         }
-        previousPosition = position;
-
+        mPreviousPosition = position;
 
         String urlThumnail = currentMovie.getUrlThumbnail();
         loadImages(urlThumnail, holder);
@@ -98,7 +103,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
 
     private void loadImages(String urlThumbnail, final ViewHolderBoxOffice holder) {
         if (!urlThumbnail.equals(Constants.NA)) {
-            imageLoader.get(urlThumbnail, new ImageLoader.ImageListener() {
+            mImageLoader.get(urlThumbnail, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
                     holder.movieThumbnail.setImageBitmap(response.getBitmap());
@@ -114,7 +119,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
 
     @Override
     public int getItemCount() {
-        return listMovies.size();
+        return mListMovies.size();
     }
 
     static class ViewHolderBoxOffice extends RecyclerView.ViewHolder {

@@ -4,11 +4,17 @@
     android:layout_height="match_parent"
     tools:context="materialtest.vivz.slidenerd.fragments.FragmentBoxOffice">
 
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listMovieHits"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeMovieHits"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listMovieHits"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
     <TextView
         android:id="@+id/textVolleyError"
         android:layout_width="match_parent"
@@ -16,6 +22,6 @@
         android:layout_gravity="center"
         android:padding="@dimen/size_word"
         android:textColor="#FF4444"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>
