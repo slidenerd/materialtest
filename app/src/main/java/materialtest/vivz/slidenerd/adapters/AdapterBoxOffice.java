@@ -33,7 +33,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
     private DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-    private int previousPosition=0;
+    private int previousPosition = 0;
 
 
     public AdapterBoxOffice(Context context) {
@@ -76,14 +76,18 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
             holder.movieAudienceScore.setAlpha(1.0F);
         }
 
-        if(position>previousPosition)
-        {
-            AnimationUtils.animate(holder,true);
+        if (position > previousPosition) {
+            AnimationUtils.animate1(holder, true);
+//            AnimationUtils.animateSunblind(holder, true);
+//            AnimationUtils.animate1(holder, true);
+//            AnimationUtils.animate(holder,true);
+        } else {
+            AnimationUtils.animate1(holder, false);
+//            AnimationUtils.animateSunblind(holder, false);
+//            AnimationUtils.animate1(holder, false);
+//            AnimationUtils.animate(holder, false);
         }
-        else{
-            AnimationUtils.animate(holder, false);
-        }
-        previousPosition=position;
+        previousPosition = position;
 
 
         String urlThumnail = currentMovie.getUrlThumbnail();
