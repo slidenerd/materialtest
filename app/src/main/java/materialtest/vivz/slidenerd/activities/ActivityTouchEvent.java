@@ -15,22 +15,21 @@ import materialtest.vivz.slidenerd.materialtest.R;
 
 public class ActivityTouchEvent extends ActionBarActivity {
 
+    public static final String TAG = "VIVZ";
 
-    public static final String TAG="VIVZ";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
-        Toolbar toolbar= (Toolbar) findViewById(R.id.app_bar);
+        setupToolbar();
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-
-
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -38,7 +37,6 @@ public class ActivityTouchEvent extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_sub, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -52,7 +50,7 @@ public class ActivityTouchEvent extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        if(id==android.R.id.home){
+        if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
         }
         return super.onOptionsItemSelected(item);
@@ -61,8 +59,7 @@ public class ActivityTouchEvent extends ActionBarActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getActionMasked())
-        {
+        switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 Log.d(TAG, "Activity dispatchTouchEvent DOWN");
                 break;
@@ -76,16 +73,15 @@ public class ActivityTouchEvent extends ActionBarActivity {
                 Log.d(TAG, "Activity dispatchTouchEvent CANCEL");
                 break;
         }
-        boolean b=super.dispatchTouchEvent(ev);
-        Log.d(TAG,"Activity dispatchTouchEvent RETURNS "+b);
+        boolean b = super.dispatchTouchEvent(ev);
+        Log.d(TAG, "Activity dispatchTouchEvent RETURNS " + b);
         return b;
     }
 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getActionMasked())
-        {
+        switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 Log.d(TAG, "Activity onTouch DOWN");
                 break;
@@ -99,8 +95,8 @@ public class ActivityTouchEvent extends ActionBarActivity {
                 Log.d(TAG, "Activity onTouch CANCEL");
                 break;
         }
-        boolean b=super.onTouchEvent(event);
-        Log.d(TAG,"Activity onTouchEvent RETURNS "+b);
+        boolean b = super.onTouchEvent(event);
+        Log.d(TAG, "Activity onTouchEvent RETURNS " + b);
         return b;
     }
 } 

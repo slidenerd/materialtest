@@ -18,37 +18,44 @@ import materialtest.vivz.slidenerd.materialtest.R;
 
 public class ActivityVectorDrawable extends ActionBarActivity {
 
-    Toolbar toolbar;
-    ImageView imageView;
+    private Toolbar mToolbar;
+    private ImageView mImageVector;
 
 
-    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vector_test);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
-        imageView = (ImageView) findViewById(R.id.vectorImage);
-        Drawable drawable = null;
-        if(Util.isLollipopOrGreater()){
-            drawable=MrVector.inflate(getResources(), R.drawable.animator_vector_clock);
-        }
-        else{
-            drawable=MrVector.inflate(getResources(), R.drawable.vector_clock);
-        }
-        if(Util.isJellyBeanOrGreater()){
-            imageView.setBackground(drawable);
-        }
-        else{
-            imageView.setBackgroundDrawable(drawable);
-        }
-        if(drawable instanceof Animatable){
-            ((Animatable)drawable).start();
-        }
-
+        setupToolbar();
+        setupVectorDrawable();
     }
 
+    private void setupToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(mToolbar);
+    }
+
+    @SuppressLint("NewApi")
+    private void setupVectorDrawable() {
+        mImageVector = (ImageView) findViewById(R.id.vectorImage);
+        Drawable drawable = null;
+        if (Util.isLollipopOrGreater()) {
+            //load animated vector drawable on Lollipop+
+            drawable = MrVector.inflate(getResources(), R.drawable.animator_vector_clock);
+        } else {
+            //load normal vector drawable on prelollipop
+            drawable = MrVector.inflate(getResources(), R.drawable.vector_clock);
+        }
+        if (Util.isJellyBeanOrGreater()) {
+            mImageVector.setBackground(drawable);
+        } else {
+            mImageVector.setBackgroundDrawable(drawable);
+        }
+        //if the loaded drawable is an instance of Animatable which is possible only on Lollipop+ start the animation
+        if (drawable instanceof Animatable) {
+            ((Animatable) drawable).start();
+        }
+    }
 
 
     @Override
@@ -69,7 +76,6 @@ public class ActivityVectorDrawable extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

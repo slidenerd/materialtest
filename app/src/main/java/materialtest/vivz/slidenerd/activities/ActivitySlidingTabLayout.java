@@ -23,30 +23,35 @@ import materialtest.vivz.slidenerd.views.SlidingTabLayout;
 
 public class ActivitySlidingTabLayout extends ActionBarActivity {
 
-    private Toolbar toolbar;
+    private Toolbar mToolbar;
     private ViewPager mPager;
     private SlidingTabLayout mTabs;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_using_tab_library);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        setupToolbar();
+        setupTabs();
+    }
+
+    private void setupToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
 
-
+    private void setupTabs() {
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
         mTabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
+        //make sure all tabs take the full horizontal screen space and divide it equally amongst themselves
         mTabs.setDistributeEvenly(true);
-
         mTabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        //color of the tab indicator
         mTabs.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
         mTabs.setViewPager(mPager);
-
     }
 
 
@@ -74,7 +79,7 @@ public class ActivitySlidingTabLayout extends ActionBarActivity {
 
     class MyPagerAdapter extends FragmentPagerAdapter {
 
-        String[] tabText = getResources().getStringArray(R.array.tabs);
+        private String[] tabText = getResources().getStringArray(R.array.tabs);
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -90,9 +95,12 @@ public class ActivitySlidingTabLayout extends ActionBarActivity {
         @Override
         public CharSequence getPageTitle(int position) {
 
+            //use the MrVector library to inflate vector drawable inside tab
             Drawable drawable = MrVector.inflate(getResources(), R.drawable.vector_android);
+            //set the size of drawable to 36 pixels
             drawable.setBounds(0, 0, 36, 36);
             ImageSpan imageSpan = new ImageSpan(drawable);
+            //to make our tabs icon only, set the Text as blank string with white space
             SpannableString spannableString = new SpannableString(" ");
             spannableString.setSpan(imageSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return spannableString;
