@@ -75,7 +75,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        AnimationUtils.animateToolbar(containerAppBar);
+        AnimationUtils.animateToolbarDroppingDown(containerAppBar);
         FragmentDrawer drawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);

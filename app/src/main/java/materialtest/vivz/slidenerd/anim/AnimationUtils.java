@@ -73,7 +73,7 @@ public class AnimationUtils {
 
     }
 
-    public static void animateToolbar(View containerToolbar) {
+    public static void animateToolbarDroppingDown(View containerToolbar) {
 
         containerToolbar.setRotationX(-90);
         containerToolbar.setAlpha(0.2F);

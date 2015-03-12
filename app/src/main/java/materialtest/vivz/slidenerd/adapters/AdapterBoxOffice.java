@@ -77,12 +77,12 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
         }
 
         if (position > previousPosition) {
-            AnimationUtils.animate1(holder, true);
+            AnimationUtils.animateScatter(holder, true);
 //            AnimationUtils.animateSunblind(holder, true);
 //            AnimationUtils.animate1(holder, true);
 //            AnimationUtils.animate(holder,true);
         } else {
-            AnimationUtils.animate1(holder, false);
+            AnimationUtils.animateScatter(holder, false);
 //            AnimationUtils.animateSunblind(holder, false);
 //            AnimationUtils.animate1(holder, false);
 //            AnimationUtils.animate(holder, false);
