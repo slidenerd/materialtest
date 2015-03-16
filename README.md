@@ -33,3 +33,6 @@ Hi, its Vivz here from <a href="http://slidenerd.com" target="_blank">slidenerd.
 <p><b>Dynamic Material Tabs</b></p>
 ![testgif](https://cloud.githubusercontent.com/assets/5139030/6666135/5ecb0c6a-cc07-11e4-80ff-c2c4b5689cda.gif)
 
+<p><b>Floating Action Button With Menu</b></p>
+![testgif](https://cloud.githubusercontent.com/assets/5139030/6666153/87ef8580-cc07-11e4-8c05-b6640b1ad993.gif)
+
