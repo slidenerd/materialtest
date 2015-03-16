@@ -124,7 +124,7 @@ public class AnimationUtils {
         ObjectAnimator animatorScaleX = ObjectAnimator.ofFloat(holder.itemView, "scaleX", 0.5f, 1f);
         animatorSet.playTogether(animatorTranslateY, animatorRotation, animatorScaleX);
         animatorSet.setInterpolator(new DecelerateInterpolator(1.1f));
-        animatorSet.setDuration(2000);
+        animatorSet.setDuration(1000);
         animatorSet.start();
     }
 

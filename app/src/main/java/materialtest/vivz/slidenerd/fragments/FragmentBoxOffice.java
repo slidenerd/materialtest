@@ -1,6 +1,7 @@
 package materialtest.vivz.slidenerd.fragments;
 
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -21,6 +23,7 @@ import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 
+import materialtest.vivz.slidenerd.activities.ActivityMain;
 import materialtest.vivz.slidenerd.adapters.AdapterBoxOffice;
 import materialtest.vivz.slidenerd.callbacks.BoxOfficeMoviesLoadedListener;
 import materialtest.vivz.slidenerd.extras.MovieSorter;
@@ -91,6 +94,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, BoxOffi
         mRecyclerMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new AdapterBoxOffice(getActivity());
         mRecyclerMovies.setAdapter(mAdapter);
+
         if (savedInstanceState != null) {
             //if this fragment starts after a rotation or configuration change, load the existing movies from a parcelable
             mListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
@@ -107,6 +111,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, BoxOffi
         mAdapter.setMovies(mListMovies);
         return layout;
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {

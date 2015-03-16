@@ -5,36 +5,11 @@
     android:background="@android:color/white"
     tools:context="materialtest.vivz.slidenerd.fragments.FragmentDrawer">
 
-    <LinearLayout
-        android:id="@+id/containerDrawerImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FB8C00">
-
-        <ImageView
-            android:layout_width="280dp"
-            android:layout_height="140dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="@dimen/drawer_margin_top"
-            android:src="@drawable/ic_abstract" />
-    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/drawerList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/containerDrawerImage" />
-
-    <FrameLayout
-        android:id="@+id/overlayFrame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/containerDrawerImage">
-        <ImageView
-            android:id="@+id/overlayImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </FrameLayout>
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
 

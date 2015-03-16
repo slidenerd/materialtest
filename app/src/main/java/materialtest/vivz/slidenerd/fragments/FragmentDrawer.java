@@ -4,6 +4,7 @@ package materialtest.vivz.slidenerd.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import materialtest.vivz.slidenerd.activities.ActivityMain;
 import materialtest.vivz.slidenerd.adapters.AdapterDrawer;
 import materialtest.vivz.slidenerd.materialtest.MyApplication;
 import materialtest.vivz.slidenerd.materialtest.R;
@@ -64,16 +66,16 @@ public class FragmentDrawer extends Fragment {
         // Required empty public constructor
     }
 
-    public static List<Information> getData() {
+    public List<Information> getData() {
         //load only static data inside a drawer
         List<Information> data = new ArrayList<>();
-        int[] icons = {R.drawable.ic_number1, R.drawable.ic_number2, R.drawable.ic_number3, R.drawable.ic_number4};
-        String[] titles = {"Vivz", "Anky", "Slidenerd", "YouTube"};
-        for (int i = 0; i < 100; i++) {
-            Information current = new Information();
-            current.iconId = icons[i % icons.length];
-            current.title = titles[i % titles.length];
-            data.add(current);
+        int[] icons = {R.drawable.ic_action_search_orange, R.drawable.ic_action_trending_orange, R.drawable.ic_action_upcoming_orange};
+        String[] titles = getResources().getStringArray(R.array.drawer_tabs);
+        for (int i = 0; i < titles.length; i++) {
+            Information information = new Information();
+            information.title = titles[i];
+            information.iconId = icons[i];
+            data.add(information);
         }
         return data;
     }
@@ -83,9 +85,7 @@ public class FragmentDrawer extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUserLearnedDrawer = Boolean.valueOf(MyApplication.readFromPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, "false"));
-        if (savedInstanceState != null) {
-            mFromSavedInstanceState = true;
-        }
+        mFromSavedInstanceState = savedInstanceState != null ? true : false;
     }
 
     @Override
@@ -100,7 +100,8 @@ public class FragmentDrawer extends Fragment {
         mRecyclerDrawer.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerDrawer, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                ((ActivityMain) getActivity()).onDrawerItemClicked(position-1);
             }
 
             @Override

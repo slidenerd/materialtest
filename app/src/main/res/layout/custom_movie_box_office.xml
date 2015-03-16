@@ -12,9 +12,7 @@
         android:id="@+id/movieThumbnail"
         android:layout_width="@dimen/movie_thumbnail_width"
         android:layout_height="@dimen/movie_thumbnail_height"
-        android:layout_centerVertical="true"
-
-        android:src="@drawable/ic_launcher" />
+        android:layout_centerVertical="true" />
 
     <TextView
         android:id="@+id/movieTitle"
@@ -27,7 +25,6 @@
         android:alpha="0.87"
         android:gravity="right"
         android:padding="@dimen/size_half_byte"
-        android:text="Hitman Agent 47"
         android:textSize="@dimen/size_text_primary" />
 
     <TextView
@@ -38,7 +35,6 @@
         android:layout_below="@id/movieTitle"
         android:alpha="0.87"
         android:padding="@dimen/size_half_byte"
-        android:text="31-31-31"
         android:textSize="@dimen/size_text_secondary" />
 
     <RatingBar

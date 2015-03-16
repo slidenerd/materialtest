@@ -93,6 +93,13 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
     }
 
+    public void onDrawerItemClicked(int index){
+        mPager.setCurrentItem(index);
+    }
+    public View getContainerToolbar() {
+        return mContainerToolbar;
+    }
+
     private void setupTabs() {
         mTabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
         mPager = (ViewPager) findViewById(R.id.viewPager);
@@ -263,9 +270,9 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-        int icons[] = {R.drawable.ic_action_home,
-                R.drawable.ic_action_articles,
-                R.drawable.ic_action_personal,};
+        int icons[] = {R.drawable.ic_action_search,
+                R.drawable.ic_action_trending,
+                R.drawable.ic_action_upcoming};
 
         FragmentManager fragmentManager;
 
