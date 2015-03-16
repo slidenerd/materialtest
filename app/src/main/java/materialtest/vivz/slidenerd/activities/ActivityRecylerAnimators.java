@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import jp.wasabeef.recyclerview.animators.FlipInTopXAnimator;
-import materialtest.vivz.slidenerd.adapters.AdapterRecyclerItemAnimations;
+import materialtest.vivz.slidenerd.adapters.AdapterRecyclerAnimators;
 import materialtest.vivz.slidenerd.materialtest.R;
 import materialtest.vivz.slidenerd.views.Util;
 
@@ -24,7 +24,7 @@ public class ActivityRecylerAnimators extends ActionBarActivity {
     //recyclerview showing all items added by the user
     private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
-    private AdapterRecyclerItemAnimations mAdapter;
+    private AdapterRecyclerAnimators mAdapter;
 
 
     @Override
@@ -45,7 +45,7 @@ public class ActivityRecylerAnimators extends ActionBarActivity {
     private void initViews() {
         mInput = (EditText) findViewById(R.id.text_input);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerAnimatedItems);
-        mAdapter = new AdapterRecyclerItemAnimations(this);
+        mAdapter = new AdapterRecyclerAnimators(this);
         //set an animator on the RecyclerView that works only when items are added or removed
         FlipInTopXAnimator animator = new FlipInTopXAnimator();
         animator.setAddDuration(ANIMATION_DURATION);

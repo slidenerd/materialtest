@@ -15,12 +15,12 @@ import materialtest.vivz.slidenerd.materialtest.R;
 /**
  * Created by Windows on 04-03-2015.
  */
-public class AdapterRecyclerItemAnimations extends RecyclerView.Adapter<AdapterRecyclerItemAnimations.Holder> {
+public class AdapterRecyclerAnimators extends RecyclerView.Adapter<AdapterRecyclerAnimators.Holder> {
     private ArrayList<String> mListData = new ArrayList<>();
     private LayoutInflater mLayoutInflater;
 
 
-    public AdapterRecyclerItemAnimations(Context context) {
+    public AdapterRecyclerAnimators(Context context) {
         mLayoutInflater = LayoutInflater.from(context);
     }
 

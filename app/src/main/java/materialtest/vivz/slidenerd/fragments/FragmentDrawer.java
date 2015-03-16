@@ -2,7 +2,6 @@ package materialtest.vivz.slidenerd.fragments;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -19,7 +18,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import materialtest.vivz.slidenerd.adapters.AdapterVivz;
+import materialtest.vivz.slidenerd.adapters.AdapterDrawer;
+import materialtest.vivz.slidenerd.materialtest.MyApplication;
 import materialtest.vivz.slidenerd.materialtest.R;
 import materialtest.vivz.slidenerd.pojo.Information;
 
@@ -50,16 +50,15 @@ public class FragmentDrawer extends Fragment {
 
     9 Add the onItemTouchListener object for our RecyclerView that uses our class created in step 1
      */
-    public static final String PREF_FILE_NAME = "testpref";
     public static final String KEY_USER_LEARNED_DRAWER = "user_learned_drawer";
-    private RecyclerView recyclerView;
+    private RecyclerView mRecyclerDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private AdapterVivz adapter;
+    private AdapterDrawer mAdapter;
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
-    private View containerView;
-    private boolean isDrawerOpened = false;
+    private View mContainer;
+    private boolean mDrawerOpened = false;
 
     public FragmentDrawer() {
         // Required empty public constructor
@@ -80,22 +79,10 @@ public class FragmentDrawer extends Fragment {
     }
 
 
-    public static void saveToPreferences(Context context, String preferenceName, String preferenceValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(preferenceName, preferenceValue);
-        editor.apply();
-    }
-
-    public static String readFromPreferences(Context context, String preferenceName, String defaultValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(preferenceName, defaultValue);
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserLearnedDrawer = Boolean.valueOf(readFromPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, "false"));
+        mUserLearnedDrawer = Boolean.valueOf(MyApplication.readFromPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, "false"));
         if (savedInstanceState != null) {
             mFromSavedInstanceState = true;
         }
@@ -106,11 +93,11 @@ public class FragmentDrawer extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
-        adapter = new AdapterVivz(getActivity(), getData());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView,new ClickListener() {
+        mRecyclerDrawer = (RecyclerView) layout.findViewById(R.id.drawerList);
+        mAdapter = new AdapterDrawer(getActivity(), getData());
+        mRecyclerDrawer.setAdapter(mAdapter);
+        mRecyclerDrawer.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerDrawer.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerDrawer, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
 
@@ -125,7 +112,7 @@ public class FragmentDrawer extends Fragment {
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
-        containerView = getActivity().findViewById(fragmentId);
+        mContainer = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -134,7 +121,7 @@ public class FragmentDrawer extends Fragment {
 
                 if (!mUserLearnedDrawer) {
                     mUserLearnedDrawer = true;
-                    saveToPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer + "");
+                    MyApplication.saveToPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer + "");
                 }
                 getActivity().invalidateOptionsMenu();
             }
@@ -153,7 +140,7 @@ public class FragmentDrawer extends Fragment {
             }
         };
         if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
-            mDrawerLayout.openDrawer(containerView);
+            mDrawerLayout.openDrawer(mContainer);
         }
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.post(new Runnable() {
@@ -164,18 +151,21 @@ public class FragmentDrawer extends Fragment {
         });
 
     }
-    public static interface ClickListener{
+
+    public static interface ClickListener {
         public void onClick(View view, int position);
+
         public void onLongClick(View view, int position);
     }
 
-    static class RecyclerTouchListener implements  RecyclerView.OnItemTouchListener{
+    static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
         private ClickListener clickListener;
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener){
-            this.clickListener=clickListener;
-            gestureDetector=new GestureDetector(context, new GestureDetector.SimpleOnGestureListener(){
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override
                 public boolean onSingleTapUp(MotionEvent e) {
                     return true;
@@ -183,20 +173,19 @@ public class FragmentDrawer extends Fragment {
 
                 @Override
                 public void onLongPress(MotionEvent e) {
-                    View child=recyclerView.findChildViewUnder(e.getX(), e.getY());
-                    if(child!=null && clickListener!=null)
-                    {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
                         clickListener.onLongClick(child, recyclerView.getChildPosition(child));
                     }
                 }
             });
         }
+
         @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
 
-            View child=rv.findChildViewUnder(e.getX(), e.getY());
-            if(child!=null && clickListener!=null && gestureDetector.onTouchEvent(e))
-            {
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
                 clickListener.onClick(child, rv.getChildPosition(child));
             }
             return false;
