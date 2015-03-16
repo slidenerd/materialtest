@@ -19,3 +19,6 @@ Hi, its Vivz here from slidenerd. Wanna make a material design app without a lot
 
 <p><b>Material Drawer</b></p>
 ![testgif](https://cloud.githubusercontent.com/assets/5139030/6666009/1516139a-cc06-11e4-9134-4d68d4af56ce.gif)
+
+<p><b>SlidingTabLayout with VectorDrawables</b></p>
+![testgif](https://cloud.githubusercontent.com/assets/5139030/6666059/851f87fc-cc06-11e4-88e9-f52a4f5dddb8.gif)
