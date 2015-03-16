@@ -16,3 +16,6 @@ Hi, its Vivz here from slidenerd. Wanna make a material design app without a lot
 
 <p><b>RecyclerView with Animations</b></p>
 ![testgif](https://cloud.githubusercontent.com/assets/5139030/6665960/a8bc08ee-cc05-11e4-8294-cf9b62de7264.gif)
+
+<p><b>Material Drawer</b></p>
+![testgif](https://cloud.githubusercontent.com/assets/5139030/6666009/1516139a-cc06-11e4-9134-4d68d4af56ce.gif)
