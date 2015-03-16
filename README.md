@@ -29,3 +29,7 @@ Hi, its Vivz here from <a href="http://slidenerd.com" target="_blank">slidenerd.
 
 <p><b>Recycler Item Animators</b></p>
 ![testgif](https://cloud.githubusercontent.com/assets/5139030/6666103/fc402576-cc06-11e4-90be-d710a6c720dd.gif)
+
+<p><b>Dynamic Material Tabs</b></p>
+![testgif](https://cloud.githubusercontent.com/assets/5139030/6666135/5ecb0c6a-cc07-11e4-80ff-c2c4b5689cda.gif)
+
