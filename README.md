@@ -11,8 +11,8 @@ Hi, its Vivz here from slidenerd. Wanna make a material design app without a lot
 <li>Material Design Tabs With Icons</li>
 </ol>
 
-Animated Toolbar
+<p>Animated Toolbar</p>
 ![testgif](https://cloud.githubusercontent.com/assets/5139030/6665955/969d5d70-cc05-11e4-9691-fe776b18224c.gif)
 
-RecyclerView with Animations
+<p>RecyclerView with Animations</p>
 ![testgif](https://cloud.githubusercontent.com/assets/5139030/6665960/a8bc08ee-cc05-11e4-8294-cf9b62de7264.gif)
