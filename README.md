@@ -1,6 +1,7 @@
 Material-Design-Test-App
 ========================
-Hi, its Vivz here from slidenerd. Wanna make a material design app without a lot of headaches? You came to the right repository. This app is a movie list downloading app from RottenTomatoes that has the following features which are being continually updated.
+Hi, its Vivz here from <a href="http://slidenerd.com">slidenerd.</a> Wanna make a material design app without a lot of headaches? You came to the right repository. This app is a movie list downloading app from RottenTomatoes that has the following features which are being continually updated.
+
 <ol>
 <li>Vector + Animated Vector Drawables</li>
 <li>Material Style Navigation Drawer</li>
@@ -25,3 +26,6 @@ Hi, its Vivz here from slidenerd. Wanna make a material design app without a lot
 
 <p><b>Animated VectorDrawables</b></p>
 ![testgif](https://cloud.githubusercontent.com/assets/5139030/6666086/c75a84a0-cc06-11e4-94dc-654745d8f08b.gif)
+
+<p><b>Recycler Item Animators</b></p>
+![testgif](https://cloud.githubusercontent.com/assets/5139030/6666103/fc402576-cc06-11e4-90be-d710a6c720dd.gif)
