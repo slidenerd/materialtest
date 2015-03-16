@@ -22,3 +22,6 @@ Hi, its Vivz here from slidenerd. Wanna make a material design app without a lot
 
 <p><b>SlidingTabLayout with VectorDrawables</b></p>
 ![testgif](https://cloud.githubusercontent.com/assets/5139030/6666059/851f87fc-cc06-11e4-88e9-f52a4f5dddb8.gif)
+
+<p><b>Animated VectorDrawables</b></p>
+![testgif](https://cloud.githubusercontent.com/assets/5139030/6666086/c75a84a0-cc06-11e4-94dc-654745d8f08b.gif)
