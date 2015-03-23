@@ -58,7 +58,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     //tag associated with the FAB menu button that sorts by ratings
     private static final String TAG_SORT_RATINGS = "sortRatings";
     //Run the JobSchedulerService every 2 minutes
-    private static final long POLL_FREQUENCY = 12000000;
+    private static final long POLL_FREQUENCY = 28800000;
     private JobScheduler mJobScheduler;
     private Toolbar mToolbar;
     //a layout grouping the toolbar and the tabs together
@@ -93,9 +93,10 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
     }
 
-    public void onDrawerItemClicked(int index){
+    public void onDrawerItemClicked(int index) {
         mPager.setCurrentItem(index);
     }
+
     public View getContainerToolbar() {
         return mContainerToolbar;
     }
@@ -215,6 +216,9 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
             startActivity(new Intent(this, ActivityTouchEvent.class));
         }
 
+        if (R.id.action_activity_calling == id) {
+            startActivity(new Intent(this, ActivityA.class));
+        }
         if (R.id.action_tabs_using_library == id) {
             startActivity(new Intent(this, ActivitySlidingTabLayout.class));
         }

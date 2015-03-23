@@ -54,6 +54,14 @@
             android:name="materialtest.vivz.slidenerd.activities.ActivityRecylerAnimators"
             android:label="@string/title_activity_recycler_item_animations" >
         </activity>
+        <activity
+            android:name="materialtest.vivz.slidenerd.activities.ActivityA"
+            android:label="@string/title_activity_activity_calling" >
+        </activity>
+        <activity
+            android:name="materialtest.vivz.slidenerd.activities.ActivityB"
+            android:label="@string/title_activity_activity_called" >
+        </activity>
     </application>
 
 </manifest>

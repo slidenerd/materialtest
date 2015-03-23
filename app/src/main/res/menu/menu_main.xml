@@ -33,5 +33,9 @@
         android:orderInCategory="500"
         android:title="@string/action_recycler_item_animations"
         app:showAsAction="never" />
-
+    <item
+        android:id="@+id/action_activity_calling"
+        android:orderInCategory="600"
+        android:title="@string/action_activity_calling"
+        app:showAsAction="never" />
 </menu>

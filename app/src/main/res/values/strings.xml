@@ -38,5 +38,8 @@
     <string name="action_add">+</string>
     <string name="action_remove">-</string>
     <string name="add_item">Add Item</string>
+    <string name="title_activity_activity_calling">ActivityCalling</string>
+    <string name="title_activity_activity_called">ActivityCalled</string>
+    <string name="action_activity_calling">ActivityCalling</string>
 
 </resources>

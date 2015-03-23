@@ -23,7 +23,7 @@ public class Requestor {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 url,
-                null, requestFuture, requestFuture);
+                (String)null, requestFuture, requestFuture);
 
         requestQueue.add(request);
         try {
