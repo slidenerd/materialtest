@@ -1,9 +1,14 @@
 package materialtest.vivz.slidenerd.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
-import android.transition.TransitionManager;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,14 +28,18 @@ public class ActivityA extends ActionBarActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-//        if (Build.VERSION.SDK_INT >= 21) {
-//            Explode explode = new Explode();
-//            explode.setDuration(5000);
-//            getWindow().setExitTransition(explode);
-//        }
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= 21) {
+            TransitionInflater inflater = TransitionInflater.from(this);
+            Transition transition = inflater.inflateTransition(R.transition.transition_a);
+            getWindow().setExitTransition(transition);
+            Slide slide = new Slide();
+            slide.setDuration(5000);
+            getWindow().setReenterTransition(slide);
+        }
         setContentView(R.layout.activity_a);
         mRoot = (ViewGroup) findViewById(R.id.container_a);
+
         mButton1 = (Button) findViewById(R.id.button_1);
         mButton2 = (Button) findViewById(R.id.button_2);
         mButton3 = (Button) findViewById(R.id.button_3);
@@ -65,19 +74,21 @@ public class ActivityA extends ActionBarActivity implements View.OnClickListener
     @SuppressLint("NewApi")
     @Override
     public void onClick(View v) {
-        TransitionManager.beginDelayedTransition(mRoot);
-        toggleHeight(mButton1, mButton2, mButton3, mButton4);
-//        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, null);
-//        startActivity(new Intent(this, ActivityB.class), optionsCompat.toBundle());
+//        TransitionManager.beginDelayedTransition(mRoot);
+//        toggleBounds(mButton1, mButton2, mButton3, mButton4);
+
+        ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, null);
+        startActivity(new Intent(this, ActivityB.class), compat.toBundle());
+
     }
 
-    public void toggleHeight(View... views) {
-        for (View current : views) {
-            ViewGroup.LayoutParams params = current.getLayoutParams();
-            params.height=100;
-            params.width=50;
-            current.setLayoutParams(params);
-        }
-    }
+//    public void toggleBounds(View... views) {
+//        for (View current : views) {
+//            ViewGroup.LayoutParams params = current.getLayoutParams();
+//            params.height = 100;
+//            params.width = 200;
+//            current.setLayoutParams(params);
+//        }
+//    }
 
 }

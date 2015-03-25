@@ -4,9 +4,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.transition.Slide;
+import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 
 import materialtest.vivz.slidenerd.materialtest.R;
 
@@ -14,13 +14,13 @@ public class ActivityB extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= 21) {
             Slide slide = new Slide();
             slide.setDuration(5000);
             getWindow().setEnterTransition(slide);
+            getWindow().setReturnTransition(TransitionInflater.from(this).inflateTransition(R.transition.transition_a));
         }
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_b);
     }
 
@@ -42,7 +42,6 @@ public class ActivityB extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
