@@ -38,8 +38,11 @@
     <string name="action_add">+</string>
     <string name="action_remove">-</string>
     <string name="add_item">Add Item</string>
-    <string name="title_activity_activity_calling">ActivityCalling</string>
-    <string name="title_activity_activity_called">ActivityCalled</string>
-    <string name="action_activity_calling">ActivityCalling</string>
+    <string name="title_activity_activity_calling">Content A</string>
+    <string name="title_activity_activity_called">Content B</string>
+    <string name="action_activity_calling">ContentTransitions</string>
+    <string name="title_activity_activity_shared">Shared A</string>
+    <string name="title_activity_activity_shared_b">Shared B</string>
+    <string name="action_shared_transitions">SharedElementsTransition</string>
 
 </resources>

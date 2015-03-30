@@ -38,4 +38,9 @@
         android:orderInCategory="600"
         android:title="@string/action_activity_calling"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_shared_transitions"
+        android:orderInCategory="600"
+        android:title="@string/action_shared_transitions"
+        app:showAsAction="never" />
 </menu>

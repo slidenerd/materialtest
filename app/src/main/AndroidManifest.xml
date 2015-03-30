@@ -62,6 +62,12 @@
             android:name="materialtest.vivz.slidenerd.activities.ActivityB"
             android:label="@string/title_activity_activity_called" >
         </activity>
+        <activity
+            android:name="materialtest.vivz.slidenerd.activities.ActivitySharedA"
+            android:label="@string/title_activity_activity_shared"></activity>
+        <activity
+            android:name="materialtest.vivz.slidenerd.activities.ActivitySharedB"
+            android:label="@string/title_activity_activity_shared_b"></activity>
     </application>
 
 </manifest>

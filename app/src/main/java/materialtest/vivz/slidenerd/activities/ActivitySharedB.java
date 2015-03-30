@@ -3,31 +3,29 @@ package materialtest.vivz.slidenerd.activities;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.transition.Slide;
 import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import materialtest.vivz.slidenerd.materialtest.R;
 
-public class ActivityB extends ActionBarActivity {
+public class ActivitySharedB extends ActionBarActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= 21) {
-            Slide slide = new Slide();
-            slide.setDuration(5000);
-            getWindow().setEnterTransition(slide);
-            getWindow().setReturnTransition(TransitionInflater.from(this).inflateTransition(R.transition.content_transition_a));
+            getWindow().setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(R.transition.shared_element_transition_a));
         }
-        setContentView(R.layout.activity_b);
+        setContentView(R.layout.activity_shared_b);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_activity_called, menu);
+        getMenuInflater().inflate(R.menu.menu_activity_shared_b, menu);
         return true;
     }
 
@@ -42,6 +40,7 @@ public class ActivityB extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }
