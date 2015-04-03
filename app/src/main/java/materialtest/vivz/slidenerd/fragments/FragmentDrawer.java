@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -84,16 +85,19 @@ public class FragmentDrawer extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserLearnedDrawer = Boolean.valueOf(MyApplication.readFromPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, "false"));
+        mUserLearnedDrawer = MyApplication.readFromPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, false);
         mFromSavedInstanceState = savedInstanceState != null ? true : false;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        mRecyclerDrawer = (RecyclerView) layout.findViewById(R.id.drawerList);
+        return inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        mRecyclerDrawer = (RecyclerView) view.findViewById(R.id.drawerList);
         mAdapter = new AdapterDrawer(getActivity(), getData());
         mRecyclerDrawer.setAdapter(mAdapter);
         mRecyclerDrawer.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -101,7 +105,7 @@ public class FragmentDrawer extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
-                ((ActivityMain) getActivity()).onDrawerItemClicked(position-1);
+                ((ActivityMain) getActivity()).onDrawerItemClicked(position - 1);
             }
 
             @Override
@@ -109,7 +113,7 @@ public class FragmentDrawer extends Fragment {
 
             }
         }));
-        return layout;
+
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
@@ -119,37 +123,39 @@ public class FragmentDrawer extends Fragment {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-
+                Log.d("VIVZ", "onDrawerOpened");
                 if (!mUserLearnedDrawer) {
                     mUserLearnedDrawer = true;
-                    MyApplication.saveToPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer + "");
+                    MyApplication.saveToPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer);
                 }
-                getActivity().invalidateOptionsMenu();
+                getActivity().supportInvalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
-
                 super.onDrawerClosed(drawerView);
-                getActivity().invalidateOptionsMenu();
+                Log.d("VIVZ", "onDrawerClosed");
+                getActivity().supportInvalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
+                ((ActivityMain) getActivity()).onDrawerSlide(slideOffset);
                 toolbar.setAlpha(1 - slideOffset / 2);
             }
         };
-        if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
-            mDrawerLayout.openDrawer(mContainer);
-        }
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.post(new Runnable() {
             @Override
             public void run() {
                 mDrawerToggle.syncState();
+                if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
+                    mDrawerLayout.openDrawer(mContainer);
+                }
             }
         });
+
 
     }
 
@@ -196,6 +202,4 @@ public class FragmentDrawer extends Fragment {
         public void onTouchEvent(RecyclerView rv, MotionEvent e) {
         }
     }
-
-
 }

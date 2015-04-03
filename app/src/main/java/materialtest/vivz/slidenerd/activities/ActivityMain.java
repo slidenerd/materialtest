@@ -66,16 +66,18 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     private MaterialTabHost mTabHost;
     private ViewPager mPager;
     private ViewPagerAdapter mAdapter;
-
+    private FloatingActionButton mFAB;
+    private FloatingActionMenu mFABMenu;
+    private FragmentDrawer mDrawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupDrawer();
+        setupFAB();
         setupTabs();
         setupJob();
-        setupFAB();
+        setupDrawer();
         //animate the Toolbar when it comes into the picture
         AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
 
@@ -88,10 +90,11 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //setup the NavigationDrawer
-        FragmentDrawer drawerFragment = (FragmentDrawer)
+        mDrawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        mDrawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
     }
+
 
     public void onDrawerItemClicked(int index) {
         mPager.setCurrentItem(index);
@@ -151,7 +154,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         iconFAB.setImageResource(R.drawable.ic_action_new);
 
         //set the appropriate background for the main floating action button along with its icon
-        FloatingActionButton actionButton = new FloatingActionButton.Builder(this)
+        mFAB = new FloatingActionButton.Builder(this)
                 .setContentView(iconFAB)
                 .setBackgroundDrawable(R.drawable.selector_button_red)
                 .build();
@@ -184,11 +187,11 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         buttonSortRatings.setOnClickListener(this);
 
         //add the sub buttons to the main floating action button
-        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+        mFABMenu = new FloatingActionMenu.Builder(this)
                 .addSubActionView(buttonSortName)
                 .addSubActionView(buttonSortDate)
                 .addSubActionView(buttonSortRatings)
-                .attachTo(actionButton)
+                .attachTo(mFAB)
                 .build();
     }
 
@@ -273,6 +276,20 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
             }
         }
 
+    }
+
+
+    private void toggleTranslateFAB(float slideOffset) {
+        if (mFABMenu != null) {
+            if (mFABMenu.isOpen()) {
+                mFABMenu.close(true);
+            }
+            mFAB.setTranslationX(slideOffset * 200);
+        }
+    }
+
+    public void onDrawerSlide(float slideOffset) {
+        toggleTranslateFAB(slideOffset);
     }
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
