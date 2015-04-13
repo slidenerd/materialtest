@@ -17,6 +17,8 @@ import materialtest.vivz.slidenerd.pojo.Movie;
  * Created by Windows on 25-02-2015.
  */
 public class DBMovies {
+    public static final int BOX_OFFICE = 0;
+    public static final int UPCOMING = 1;
     private MoviesHelper mHelper;
     private SQLiteDatabase mDatabase;
 
@@ -25,12 +27,14 @@ public class DBMovies {
         mDatabase = mHelper.getWritableDatabase();
     }
 
-    public void insertMoviesBoxOffice(ArrayList<Movie> listMovies, boolean clearPrevious) {
+    public void insertMovies(int table, ArrayList<Movie> listMovies, boolean clearPrevious) {
         if (clearPrevious) {
-            deleteAll();
+            deleteMovies(table);
         }
+
+
         //create a sql prepared statement
-        String sql = "INSERT INTO " + MoviesHelper.TABLE_BOX_OFFICE + " VALUES (?,?,?,?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO " + (table == BOX_OFFICE ? MoviesHelper.TABLE_BOX_OFFICE : MoviesHelper.TABLE_UPCOMING) + " VALUES (?,?,?,?,?,?,?,?,?,?);";
         //compile the statement and start a transaction
         SQLiteStatement statement = mDatabase.compileStatement(sql);
         mDatabase.beginTransaction();
@@ -56,7 +60,7 @@ public class DBMovies {
         mDatabase.endTransaction();
     }
 
-    public ArrayList<Movie> getAllMoviesBoxOffice() {
+    public ArrayList<Movie> readMovies(int table) {
         ArrayList<Movie> listMovies = new ArrayList<>();
 
         //get a list of columns to be retrieved, we need all of them
@@ -71,7 +75,7 @@ public class DBMovies {
                 MoviesHelper.COLUMN_URL_REVIEWS,
                 MoviesHelper.COLUMN_URL_SIMILAR
         };
-        Cursor cursor = mDatabase.query(MoviesHelper.TABLE_BOX_OFFICE, columns, null, null, null, null, null);
+        Cursor cursor = mDatabase.query((table == BOX_OFFICE ? MoviesHelper.TABLE_BOX_OFFICE : MoviesHelper.TABLE_UPCOMING), columns, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             L.m("loading entries " + cursor.getCount() + new Date(System.currentTimeMillis()));
             do {
@@ -98,11 +102,12 @@ public class DBMovies {
         return listMovies;
     }
 
-    public void deleteAll() {
-        mDatabase.delete(MoviesHelper.TABLE_BOX_OFFICE, null, null);
+    public void deleteMovies(int table) {
+        mDatabase.delete((table == BOX_OFFICE ? MoviesHelper.TABLE_BOX_OFFICE : MoviesHelper.TABLE_UPCOMING), null, null);
     }
 
     private static class MoviesHelper extends SQLiteOpenHelper {
+        public static final String TABLE_UPCOMING = " movies_upcoming";
         public static final String TABLE_BOX_OFFICE = "movies_box_office";
         public static final String COLUMN_UID = "_id";
         public static final String COLUMN_TITLE = "title";
@@ -115,6 +120,18 @@ public class DBMovies {
         public static final String COLUMN_URL_REVIEWS = "url_reviews";
         public static final String COLUMN_URL_SIMILAR = "url_similar";
         private static final String CREATE_TABLE_BOX_OFFICE = "CREATE TABLE " + TABLE_BOX_OFFICE + " (" +
+                COLUMN_UID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_TITLE + " TEXT," +
+                COLUMN_RELEASE_DATE + " INTEGER," +
+                COLUMN_AUDIENCE_SCORE + " INTEGER," +
+                COLUMN_SYNOPSIS + " TEXT," +
+                COLUMN_URL_THUMBNAIL + " TEXT," +
+                COLUMN_URL_SELF + " TEXT," +
+                COLUMN_URL_CAST + " TEXT," +
+                COLUMN_URL_REVIEWS + " TEXT," +
+                COLUMN_URL_SIMILAR + " TEXT" +
+                ");";
+        private static final String CREATE_TABLE_UPCOMING = "CREATE TABLE " + TABLE_UPCOMING + " (" +
                 COLUMN_UID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_TITLE + " TEXT," +
                 COLUMN_RELEASE_DATE + " INTEGER," +
@@ -139,6 +156,7 @@ public class DBMovies {
         public void onCreate(SQLiteDatabase db) {
             try {
                 db.execSQL(CREATE_TABLE_BOX_OFFICE);
+                db.execSQL(CREATE_TABLE_UPCOMING);
                 L.m("create table box office executed");
             } catch (SQLiteException exception) {
                 L.t(mContext, exception + "");
@@ -150,6 +168,7 @@ public class DBMovies {
             try {
                 L.m("upgrade table box office executed");
                 db.execSQL(" DROP TABLE " + TABLE_BOX_OFFICE + " IF EXISTS;");
+                db.execSQL(" DROP TABLE " + TABLE_UPCOMING + " IF EXISTS;");
                 onCreate(db);
             } catch (SQLiteException exception) {
                 L.t(mContext, exception + "");

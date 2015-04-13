@@ -17,7 +17,7 @@ import materialtest.vivz.slidenerd.logging.L;
  * Created by Windows on 02-03-2015.
  */
 public class Requestor {
-    public static JSONObject sendRequestBoxOfficeMovies(RequestQueue requestQueue, String url) {
+    public static JSONObject requestMoviesJSON(RequestQueue requestQueue, String url) {
         JSONObject response = null;
         RequestFuture<JSONObject> requestFuture = RequestFuture.newFuture();
 

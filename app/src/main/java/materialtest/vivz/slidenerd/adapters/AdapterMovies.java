@@ -26,7 +26,7 @@ import materialtest.vivz.slidenerd.pojo.Movie;
 /**
  * Created by Windows on 12-02-2015.
  */
-public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.ViewHolderBoxOffice> {
+public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolderBoxOffice> {
 
     //contains the list of movies
     private ArrayList<Movie> mListMovies = new ArrayList<>();
@@ -39,7 +39,7 @@ public class AdapterBoxOffice extends RecyclerView.Adapter<AdapterBoxOffice.View
     private int mPreviousPosition = 0;
 
 
-    public AdapterBoxOffice(Context context) {
+    public AdapterMovies(Context context) {
         mInflater = LayoutInflater.from(context);
         mVolleySingleton = VolleySingleton.getInstance();
         mImageLoader = mVolleySingleton.getImageLoader();

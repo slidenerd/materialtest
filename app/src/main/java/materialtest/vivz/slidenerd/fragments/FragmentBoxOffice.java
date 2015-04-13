@@ -1,7 +1,6 @@
 package materialtest.vivz.slidenerd.fragments;
 
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -23,9 +21,9 @@ import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 
-import materialtest.vivz.slidenerd.activities.ActivityMain;
-import materialtest.vivz.slidenerd.adapters.AdapterBoxOffice;
+import materialtest.vivz.slidenerd.adapters.AdapterMovies;
 import materialtest.vivz.slidenerd.callbacks.BoxOfficeMoviesLoadedListener;
+import materialtest.vivz.slidenerd.database.DBMovies;
 import materialtest.vivz.slidenerd.extras.MovieSorter;
 import materialtest.vivz.slidenerd.extras.SortListener;
 import materialtest.vivz.slidenerd.logging.L;
@@ -46,7 +44,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, BoxOffi
     //the arraylist containing our list of box office his
     private ArrayList<Movie> mListMovies = new ArrayList<>();
     //the adapter responsible for displaying our movies within a RecyclerView
-    private AdapterBoxOffice mAdapter;
+    private AdapterMovies mAdapter;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     //the recyclerview containing showing all our movies
@@ -92,7 +90,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, BoxOffi
         mRecyclerMovies = (RecyclerView) layout.findViewById(R.id.listMovieHits);
         //set the layout manager before trying to display data
         mRecyclerMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new AdapterBoxOffice(getActivity());
+        mAdapter = new AdapterMovies(getActivity());
         mRecyclerMovies.setAdapter(mAdapter);
 
         if (savedInstanceState != null) {
@@ -100,7 +98,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, BoxOffi
             mListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
         } else {
             //if this fragment starts for the first time, load the list of movies from a database
-            mListMovies = MyApplication.getWritableDatabase().getAllMoviesBoxOffice();
+            mListMovies = MyApplication.getWritableDatabase().readMovies(DBMovies.BOX_OFFICE);
             //if the database is empty, trigger an AsycnTask to download movie list from the web
             if (mListMovies.isEmpty()) {
                 L.m("FragmentBoxOffice: executing task from fragment");

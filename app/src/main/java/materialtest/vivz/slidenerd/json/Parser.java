@@ -33,7 +33,7 @@ import static materialtest.vivz.slidenerd.extras.Keys.EndpointBoxOffice.KEY_TITL
  * Created by Windows on 02-03-2015.
  */
 public class Parser {
-    public static ArrayList<Movie> parseJSONResponse(JSONObject response) {
+    public static ArrayList<Movie> parseMoviesJSON(JSONObject response) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         ArrayList<Movie> listMovies = new ArrayList<>();
         if (response != null && response.length() > 0) {
